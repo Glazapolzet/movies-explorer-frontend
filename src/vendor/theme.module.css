@@ -1,0 +1,48 @@
+/*Colors*/
+/*      */
+@value color-primary: #202020;
+@value color-primary-landing: #272727;
+@value color-primary-landing-l: #303030;
+@value color-primary-special: #2F2F2F;
+@value color-secondary: #3DDC84;
+@value color-promo: #073042;
+@value color-accent: #EE3465;
+@value color-feature: #4285F4;
+
+@value color-stroke-d: #424242;
+@value color-stroke-l: #DADADA;
+
+@value color-text-primary: #FFFFFF;
+@value color-text-secondary: #8B8B8B;
+@value color-text-promo: #000000;
+@value color-text-warning: color-accent;
+@value color-text-link: color-feature;
+
+@value color-movie-card: #222222;
+
+/*Fonts*/
+/*     */
+@value font-family-primary: Inter, 'Roboto', sans-serif;
+
+@value font-size-small: 11px;
+@value font-size-primary: 14px;
+@value font-size-medium: 18px;
+@value font-size-large: 50px;
+
+@value font-size-primary-s: 11px;
+@value font-size-large-s: 30px;
+
+/*Media*/
+/*     */
+@value screen-medium: (max-width: 1279px);
+@value screen-small: (max-width: 767px);
+
+/*Line-height*/
+/*           */
+@value line-height-primary: 1.2;
+@value line-height-medium: 1.4;
+@value line-height-large: 1.6;
+
+
+
+

@@ -1,0 +1,10 @@
+@value theme: 'vendor/theme.module.css';
+@value font-family-primary from theme;
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  font-family: font-family-primary;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
