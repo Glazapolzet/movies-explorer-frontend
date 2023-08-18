@@ -40,6 +40,15 @@
   --line-height-primary: 1.2;
   --line-height-m: 1.4;
   --line-height-l: 1.6;
+
+  /*Transition*/
+  /*           */
+  --transition-primary: .3s ease-out;
+
+  /*Opacity*/
+  /*       */
+  --opacity-link-hover: .7;
+  --opacity-button-hover: .8;
 }
 
 
