@@ -2,16 +2,16 @@
   /*Colors*/
   /*      */
   --color-primary: #202020;
-  --color-primary-landing: #272727;
-  --color-primary-landing-l: #303030;
-  --color-primary-special: #2F2F2F;
+  --color-landing: #272727;
+  --color-landing-lt: #303030;
+  --color-special: #2F2F2F;
   --color-secondary: #3DDC84;
   --color-promo: #073042;
   --color-accent: #EE3465;
   --color-feature: #4285F4;
 
-  --color-stroke-d: #424242;
-  --color-stroke-l: #DADADA;
+  --color-stroke-dk: #424242;
+  --color-stroke-lt: #DADADA;
 
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #8B8B8B;
@@ -25,19 +25,18 @@
   /*     */
   --font-family-primary: Inter, 'Roboto', sans-serif;
 
-  --font-size-small: calc(11 / 16 * 1rem);
+  --font-size-xs: calc(10 / 16 * 1rem);
+  --font-size-s: calc(12 / 16 * 1rem);
   --font-size-primary: calc(14 / 16 * 1rem);
-  --font-size-medium: calc(18 / 16 * 1rem);
-  --font-size-large: calc(50 / 16 * 1rem);
-
-  --font-size-primary-s: calc(11 / 16 * 1rem);
-  --font-size-large-s: calc(30 / 16 * 1rem);
+  --font-size-m: calc(18 / 16 * 1rem);
+  --font-size-l: calc(50 / 16 * 1rem);
+  --font-size-xl: calc(50 / 16 * 1rem);
 
   /*Line-height*/
   /*           */
   --line-height-primary: 1.2;
-  --line-height-medium: 1.4;
-  --line-height-large: 1.6;
+  --line-height-m: 1.4;
+  --line-height-l: 1.6;
 }
 
 
