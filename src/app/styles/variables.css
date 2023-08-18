@@ -25,6 +25,9 @@
   /*     */
   --font-family-primary: Inter, 'Roboto', sans-serif;
 
+  --font-weight-normal: 400;
+  --font-weight-bold: 500;
+
   --font-size-xs: calc(10 / 16 * 1rem);
   --font-size-s: calc(12 / 16 * 1rem);
   --font-size-primary: calc(14 / 16 * 1rem);
