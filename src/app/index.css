@@ -4,7 +4,7 @@
 @import 'styles/base.css';
 
 p {
-  font-size: var(--font-size-large);
+  font-size: var(--font-size-l);
 }
 /*.layout {*/
 /*  display: flex;*/
