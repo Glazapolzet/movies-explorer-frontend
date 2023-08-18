@@ -1,9 +1,0 @@
-@value theme: 'vendor/theme.module.css';
-@value color-primary from theme;
-
-.App {
-  background-color: color-primary;
-  display: flex;
-  text-align: center;
-  height: 200px;
-}
