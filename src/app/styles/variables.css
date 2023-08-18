@@ -25,13 +25,13 @@
   /*     */
   --font-family-primary: Inter, 'Roboto', sans-serif;
 
-  --font-size-small: 11px;
-  --font-size-primary: 14px;
-  --font-size-medium: 18px;
-  --font-size-large: 50px;
+  --font-size-small: calc(11 / 16 * 1rem);
+  --font-size-primary: calc(14 / 16 * 1rem);
+  --font-size-medium: calc(18 / 16 * 1rem);
+  --font-size-large: calc(50 / 16 * 1rem);
 
-  --font-size-primary-s: 11px;
-  --font-size-large-s: 30px;
+  --font-size-primary-s: calc(11 / 16 * 1rem);
+  --font-size-large-s: calc(30 / 16 * 1rem);
 
   /*Line-height*/
   /*           */
