@@ -1,16 +1,18 @@
 import React from 'react';
 import './index.css';
-import { CaptionWithLink } from 'entities/caption';
-import {Promo} from "../components/Promo";
+import {Promo} from "components/Promo";
+import {NavTab} from "components/NavTab";
 
 const App = () => {
   return (
     <>
-      <Promo></Promo>
-      <CaptionWithLink
-        captionText={'About?'}
-        linkText={'OOOO'}
-        linkTo={'https://github.com/Glazapolzet/gnome/blob/dev-vypova-refactor/src/components/action-dot/ActionDot/ActionDot.tsx'}
+      <Promo/>
+      <NavTab
+        links={[
+          { text: "О проекте", href: "#aboutProject" },
+          { text: "Технологии", href: "#techs" },
+          { text: "Студент", href: "#aboutMe" },
+        ]}
       />
     </>
   );
