@@ -32,7 +32,7 @@
   --font-size-s: calc(12 / 16 * 1rem);
   --font-size-primary: calc(14 / 16 * 1rem);
   --font-size-m: calc(18 / 16 * 1rem);
-  --font-size-l: calc(50 / 16 * 1rem);
+  --font-size-l: calc(30 / 16 * 1rem);
   --font-size-xl: calc(50 / 16 * 1rem);
 
   /*Line-height*/
