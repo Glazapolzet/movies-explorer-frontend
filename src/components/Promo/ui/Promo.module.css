@@ -1,5 +1,6 @@
 .promo {
   display: flex;
+  width: 100%;
   min-height: calc(524px + var(--header-h));
   background-color: var(--color-promo);
   background-image: url("../../../assets/images/logo_promo.svg");
@@ -20,6 +21,7 @@
 
 .title {
   margin: 0;
+  font-family: inherit;
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-primary);

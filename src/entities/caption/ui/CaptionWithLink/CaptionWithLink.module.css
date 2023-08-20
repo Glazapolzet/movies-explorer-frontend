@@ -4,6 +4,7 @@
 }
 
 .text {
+  font-family: inherit;
   font-size: var(--font-size-primary);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-primary);
