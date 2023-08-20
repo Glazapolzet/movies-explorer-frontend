@@ -50,6 +50,10 @@
   /*       */
   --opacity-link-hover: .7;
   --opacity-button-hover: .8;
+
+  /*Header-height*/
+  /*             */
+  --header-h: 74px;
 }
 
 
