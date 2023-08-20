@@ -1,0 +1,17 @@
+.caption {
+  display: flex;
+  column-gap: 6px;
+}
+
+.text {
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-secondary);
+}
+
+@media screen and (max-width: 767px) {
+  .text {
+    font-size: var(--font-size-s);
+  }
+}

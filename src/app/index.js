@@ -1,15 +1,17 @@
 import React from 'react';
 import './index.css';
-import TemplateLink from 'shared/ui/Link/Link';
+import { CaptionWithLink } from 'entities/caption';
+import {Promo} from "../components/Promo";
 
 const App = () => {
   return (
     <>
-      <TemplateLink
-        to={'https://github.com/noveogroup-amorgunov/nukeapp/blob/main/src/shared/breakpoints.css'}
-      >
-        OOOOmG
-      </TemplateLink>
+      <Promo></Promo>
+      <CaptionWithLink
+        captionText={'About?'}
+        linkText={'OOOO'}
+        linkTo={'https://github.com/Glazapolzet/gnome/blob/dev-vypova-refactor/src/components/action-dot/ActionDot/ActionDot.tsx'}
+      />
     </>
   );
 }

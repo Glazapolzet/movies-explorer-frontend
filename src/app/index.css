@@ -3,9 +3,6 @@
 @import 'styles/normalize.css';
 @import 'styles/base.css';
 
-p {
-  font-size: var(--font-size-l);
+.test {
+  color: #3DDC84;
 }
-/*.layout {*/
-/*  display: flex;*/
-/*}*/

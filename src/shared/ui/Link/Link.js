@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import styles from './Link.module.css';
 
-const Link = ({ to, children }) => {
+export const Link = ({ to, children }) => {
   return (
     <RouterLink
       to={to}
@@ -12,5 +12,3 @@ const Link = ({ to, children }) => {
     </RouterLink>
   )
 }
-
-export default Link;
