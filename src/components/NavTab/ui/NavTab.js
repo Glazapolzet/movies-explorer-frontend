@@ -4,7 +4,7 @@ import { links } from '../config/config';
 
 export const NavTab = () => {
   return (
-    <nav className={styles.navtab}>
+    <nav className={styles.navTab}>
       <ul className={styles.list}>
         {links.map((link, index) => (
           <li
