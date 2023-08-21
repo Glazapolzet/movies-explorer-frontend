@@ -1,5 +1,5 @@
-import React from "react";
-import { AuthLink } from '../AuthLink/AuthLink';
+import React from 'react';
+import { AuthLink } from 'shared/ui';
 import styles from './CaptionWithLink.module.css';
 
 export const CaptionWithLink = ({ captionText, linkText, linkTo }) => {
