@@ -34,3 +34,9 @@
 .link:hover {
   opacity: var(--opacity-link-hover);
 }
+
+@media screen and (max-width: 767px) {
+  .link {
+    font-size: var(--font-size-xs);
+  }
+}
