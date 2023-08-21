@@ -30,7 +30,7 @@
   letter-spacing: -2px;
 }
 
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 999px) {
   .promo {
     min-height: calc(784px + var(--header-h));
     background-position-y: calc(224px + var(--header-h));

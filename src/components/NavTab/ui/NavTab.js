@@ -1,25 +1,11 @@
 import React from 'react';
 import styles from './NavTab.module.css';
-import { links } from '../config/config';
+import { NavList } from './NavList/NavList';
 
-export const NavTab = () => {
+export const NavTab = ({ links }) => {
   return (
     <nav className={styles.navTab}>
-      <ul className={styles.list}>
-        {links.map((link, index) => (
-          <li
-            key={index}
-            className={styles.item}
-          >
-            <a
-              className={styles.link}
-              href={link.href}
-            >
-              {link.text}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <NavList links={links} />
     </nav>
   )
 }
