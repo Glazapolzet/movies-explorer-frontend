@@ -1,0 +1,25 @@
+.title {
+  margin: 0;
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+  letter-spacing: -0.88px;
+}
+
+.underline {
+  margin-top: 23px;
+  width: 100%;
+  border-bottom: 1px solid var(--color-stroke-lt);
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    font-size: var(--font-size-m);
+  }
+
+  .underline {
+    margin-top: 28px;
+  }
+}
