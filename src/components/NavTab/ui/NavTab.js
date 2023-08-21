@@ -1,7 +1,8 @@
 import React from 'react';
 import styles from './NavTab.module.css';
+import { links } from '../config/config';
 
-export const NavTab = ({ links }) => {
+export const NavTab = () => {
   return (
     <nav className={styles.navtab}>
       <ul className={styles.list}>

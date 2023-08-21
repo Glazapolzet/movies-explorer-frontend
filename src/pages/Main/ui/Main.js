@@ -6,14 +6,8 @@ import { NavTab } from "components/NavTab";
 export const Main = () => {
   return (
     <main className={styles.main}>
-      <Promo/>
-      <NavTab
-        links={[
-          { text: "О проекте", href: "#aboutProject" },
-          { text: "Технологии", href: "#techs" },
-          { text: "Студент", href: "#aboutMe" },
-        ]}
-      />
+      <Promo />
+      <NavTab />
     </main>
   )
 }
