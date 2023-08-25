@@ -1,0 +1,64 @@
+.stageBar {
+  display: flex;
+  flex-direction: column;
+  row-gap: 14px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: minmax(141px, 228px) minmax(529px, 912px);
+}
+
+.bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bar_theme_accent {
+  background-color: var(--color-main);
+  color: var(--color-text-landing);
+}
+
+.bar_theme_normal {
+  background-color: var(--color-landing-lt);
+  color: var(--color-text-primary);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.caption {
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+@media screen and (max-width: 999px) {
+  .caption {
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-secondary-landing);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .stageBar {
+    row-gap: 10px;
+  }
+
+  .container {
+    grid-template-columns: minmax(100px, 140px) minmax(184px, 528px);
+  }
+
+  .caption {
+    font-size: var(--font-size-xs);
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .container {
+    grid-template-columns: minmax(1px, 100px) minmax(1px, 184px);
+  }
+}

@@ -10,7 +10,7 @@
   background-position-y: calc(82px + var(--header-h));
 }
 
-.container {
+.content {
   position: relative;
   max-width: 730px;
   height: fit-content;
@@ -20,14 +20,7 @@
 }
 
 .title {
-  margin: 0;
-  font-family: inherit;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-normal);
-  line-height: var(--line-height-primary);
-  color: var(--color-text-primary);
   text-align: center;
-  letter-spacing: -2px;
 }
 
 @media screen and (max-width: 999px) {
@@ -36,7 +29,7 @@
     background-position-y: calc(224px + var(--header-h));
   }
 
-  .container {
+  .content {
     top: calc(326px + var(--header-h));
   }
 }
@@ -48,13 +41,8 @@
     background-size: 248px 248px;
   }
 
-  .container {
+  .content {
     top: calc(207px + var(--header-h));
     max-width: 300px;
-  }
-
-  .title {
-    font-size: var(--font-size-l);
-    letter-spacing: -1.24px;
   }
 }

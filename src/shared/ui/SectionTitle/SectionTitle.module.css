@@ -14,9 +14,8 @@
   letter-spacing: -0.88px;
 }
 
-.underline {
-  width: 100%;
-  border-bottom: 1px solid var(--color-stroke-lt);
+.stroke {
+  border-bottom-color: var(--color-stroke-lt);
 }
 
 @media screen and (max-width: 767px) {

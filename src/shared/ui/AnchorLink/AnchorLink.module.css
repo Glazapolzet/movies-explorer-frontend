@@ -1,0 +1,9 @@
+.link {
+  text-decoration: none;
+  font-family: inherit;
+  transition: opacity var(--transition-primary);
+}
+
+.link:hover {
+  opacity: var(--opacity-link-hover);
+}

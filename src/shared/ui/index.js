@@ -1,4 +1,11 @@
 export { Link } from './Link/Link';
 export { AuthLink } from './AuthLink/AuthLink';
+export { AnchorLink } from './AnchorLink/AnchorLink';
+export { LinkWithIcon } from './LinkWithIcon/LinkWithIcon';
+export { Bar } from './Bar/Bar';
+export { Caption } from './Caption/Caption';
+export { LandingIcon } from './LandingIcon/LandingIcon';
 export { Preloader } from './Preloader/Preloader';
+export { SectionLayout } from './SectionLayout/SectionLayout';
 export { SectionTitle } from './SectionTitle/SectionTitle';
+export { Title } from './Title/Title';

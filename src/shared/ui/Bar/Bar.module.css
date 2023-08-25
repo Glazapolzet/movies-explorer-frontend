@@ -1,0 +1,19 @@
+.bar {
+  width: 100%;
+  min-height: 36px;
+}
+
+.text {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+  color: inherit;
+}
+
+@media screen and (max-width: 767px) {
+  .text {
+    font-size: var(--font-size-xs);
+  }
+}

@@ -1,0 +1,49 @@
+.briefDescription {
+  display: flex;
+  flex-direction: column;
+  row-gap: 26px;
+}
+
+.title {
+  margin: 0;
+  font-family: inherit;
+  font-size: 20px;
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+  letter-spacing: -0.8px;
+}
+
+.description {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-m);
+  color: var(--color-text-primary);
+}
+
+@media screen and (max-width: 999px) {
+  .briefDescription {
+    row-gap: 22px;
+  }
+
+  .description {
+    font-size: var(--font-size-s);
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .briefDescription {
+    row-gap: 16px;
+  }
+
+  .title {
+    font-size: var(--font-size-m);
+    letter-spacing: -0.72px;
+  }
+
+  .description {
+    font-size: var(--font-size-xs);
+  }
+}

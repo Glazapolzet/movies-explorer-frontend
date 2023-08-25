@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './SectionTitle.module.css';
+import { Stroke } from '../Stroke/Stroke';
 
 export const SectionTitle = ({ id, children }) => {
   return (
@@ -7,10 +8,10 @@ export const SectionTitle = ({ id, children }) => {
       id={id}
       className={styles.sectionTitle}
     >
-      <h2 className={styles.title}>
+      <h3 className={styles.title}>
         {children}
-      </h2>
-      <div className={styles.underline} />
+      </h3>
+      <Stroke className={styles.stroke} />
     </div>
   )
 }

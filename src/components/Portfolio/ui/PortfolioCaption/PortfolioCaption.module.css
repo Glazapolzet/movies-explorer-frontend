@@ -1,0 +1,16 @@
+.caption {
+  font-size: var(--font-size-m);
+}
+
+@media screen and (max-width: 999px) {
+  .caption {
+    color: var(--color-text-secondary-landing)
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .caption {
+    font-size: var(--font-size-primary);
+    line-height: var(--line-height-m);
+  }
+}

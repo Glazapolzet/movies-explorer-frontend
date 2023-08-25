@@ -1,0 +1,31 @@
+.icon {
+  min-width: 90px;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-landing-lt);
+  border-radius: 10px;
+}
+
+.text {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+  letter-spacing: -0.56px;
+}
+
+@media screen and (max-width: 999px) {
+  .icon {
+    min-width: 84px;
+    min-height: 57px;
+  }
+
+  .text {
+    font-size: var(--font-size-s);
+    letter-spacing: -0.48px;
+  }
+}
