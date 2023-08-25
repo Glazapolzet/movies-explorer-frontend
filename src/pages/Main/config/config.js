@@ -2,7 +2,7 @@ export const sectionIds = {
   aboutProject: "aboutProject",
   techs: "techs",
   aboutMe: "aboutMe",
-}
+};
 
 export const links = [
   {
