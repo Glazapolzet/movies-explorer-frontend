@@ -1,8 +1,4 @@
 @import 'styles/variables.css';
 @import 'styles/fonts.css';
 @import 'styles/normalize.css';
-@import 'styles/base.css';
-
-.test {
-  color: #3DDC84;
-}
+@import 'styles/global.css';

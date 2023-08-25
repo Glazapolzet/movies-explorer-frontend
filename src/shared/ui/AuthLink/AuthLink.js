@@ -2,14 +2,13 @@ import React from 'react';
 import { Link } from 'shared/ui';
 import styles from './AuthLink.module.css'
 
-export const AuthLink = ({ to, children }) => {
+export const AuthLink = ({ href, children }) => {
   return (
     <Link
-      to={to}
+      className={styles.link}
+      href={href}
     >
-      <p className={styles.text}>
-        {children}
-      </p>
+      {children}
     </Link>
   )
 }
