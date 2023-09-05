@@ -2,20 +2,48 @@ import React from 'react';
 import styles from './SearchForm.module.css';
 import { SearchInput } from './SearchInput/SearchInput';
 import { SearchButton } from './SearchButton/SearchButton';
-import { inputPlaceholder, checkboxCaption } from '../config/config';
+import { checkboxCaption, searchInput } from '../config/config';
 import { FilterCheckbox } from './FilterCheckbox/FilterCheckbox';
-import { Stroke } from 'shared/ui';
+import { Form, Stroke } from 'shared/ui';
+import { useFormWithValidation } from 'shared/lib';
 
 export const SearchForm = () => {
+
+  const { values, handleChange, errors, isValid } = useFormWithValidation({
+    [`${searchInput.name}`]: '',
+  });
+
+  const inputPlaceholder = errors[searchInput.name] === ''
+    ? searchInput.placeholder
+    : errors[searchInput.name];
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    console.log('search..');
+  }
+
   return (
     <section className={styles.searchForm}>
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.container}>
-            <div className={styles.searchPanel}>
-              <SearchInput placeholder={inputPlaceholder} />
-              <SearchButton onClick={() => console.log('search..')} />
-            </div>
+            <Form
+              onSubmit={handleSubmit}
+              className={styles.searchPanel}
+            >
+              <SearchInput
+                required={true}
+                type={'text'}
+                id={searchInput.id}
+                name={searchInput.name}
+                value={values[searchInput.name]}
+                onChange={handleChange}
+                placeholder={inputPlaceholder}
+                isValid={errors[searchInput.name] === ''}
+              />
+              <SearchButton disabled={!isValid} />
+            </Form>
 
             <FilterCheckbox
               atOn={() => console.log('filter on')}

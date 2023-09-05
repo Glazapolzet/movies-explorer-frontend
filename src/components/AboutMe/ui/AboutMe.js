@@ -21,7 +21,10 @@ export const AboutMe = ({ sectionId }) => {
             <div className={styles.container}>
               <div className={styles.textContent}>
                 <StudentInfo content={info} />
-                <StudentLink href={link.href}>
+                <StudentLink
+                  href={link.href}
+                  target={'_blank'}
+                >
                   {link.text}
                 </StudentLink>
               </div>

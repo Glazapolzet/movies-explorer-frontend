@@ -4,7 +4,7 @@ import { ProfileForm } from './ProfileForm/ProfileForm';
 import { ProfileButton } from './ProfileButton/ProfileButton';
 import { CurrentUserContext } from 'shared/contexts';
 import { greeting, logoutButtonText } from '../config/config';
-import {AuthTitle} from "../../../shared/ui";
+import { AuthTitle } from 'shared/ui';
 
 export const Profile = () => {
   const currentUser = useContext(CurrentUserContext);

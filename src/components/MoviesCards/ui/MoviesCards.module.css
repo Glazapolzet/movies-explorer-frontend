@@ -22,6 +22,14 @@
   row-gap: 60px;
 }
 
+.captionLayout {
+  display: block;
+}
+
+.captionLayout_hidden {
+  display: none;
+}
+
 .buttonLayout {
   display: block;
 }

@@ -5,7 +5,10 @@ import { Caption, Link } from 'shared/ui';
 export const Card = ({ link, image, title, caption, ButtonComponent }) => {
   return (
     <div className={styles.card}>
-      <Link href={link}>
+      <Link
+        href={link}
+        target={'_blank'}
+      >
         <img
           className={styles.image}
           src={image}

@@ -61,6 +61,11 @@
   --opacity-link-hover: .7;
   --opacity-button-hover: .8;
 
+  /*Outline*/
+  /*       */
+  --input-outline-primary: 1px solid var(--color-feature, blue);
+  --input-outline-error: 1px solid var(--color-accent, red);
+
   /*Header-height*/
   /*             */
   --header-h: 74px;

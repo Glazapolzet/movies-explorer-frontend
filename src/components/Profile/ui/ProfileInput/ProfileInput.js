@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './ProfileInput.module.css';
 
-export const ProfileInput = ({ id, name, label, value, onChange, ...props }) => {
+export const ProfileInput = ({ id, name, label, value, onChange, isValid, ...props }) => {
+  const inputErrorClass = isValid
+    ? ''
+    : styles.input_error;
+
   return (
     <div className={styles.container}>
       <label
@@ -11,7 +15,7 @@ export const ProfileInput = ({ id, name, label, value, onChange, ...props }) => 
         {label}
       </label>
       <input
-        className={styles.input}
+        className={`${styles.input} ${inputErrorClass}`}
         id={id}
         name={name}
         value={value}

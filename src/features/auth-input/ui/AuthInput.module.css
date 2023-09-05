@@ -39,6 +39,14 @@
   color: var(--color-text-primary);
 }
 
+.input:focus {
+  outline: var(--input-outline-primary);
+}
+
 .input_error {
   color: var(--color-text-warning);
+}
+
+.input_error:focus {
+  outline: var(--input-outline-error);
 }

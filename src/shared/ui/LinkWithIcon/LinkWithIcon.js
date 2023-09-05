@@ -2,9 +2,12 @@ import React from 'react';
 import styles from './LinkWithIcon.module.css';
 import { Link } from '../Link/Link';
 
-export const LinkWithIcon = ({ href, icon, children }) => {
+export const LinkWithIcon = ({ href, icon, children, ...props }) => {
   return (
-    <Link href={href}>
+    <Link
+      href={href}
+      {...props}
+    >
       <div className={styles.container}>
         <p className={styles.text}>
           {children}

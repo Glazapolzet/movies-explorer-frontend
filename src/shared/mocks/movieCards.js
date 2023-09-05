@@ -98,4 +98,4 @@ export const movieCards = [
       password: '123',
     }
   },
-];
+]

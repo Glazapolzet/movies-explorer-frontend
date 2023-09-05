@@ -33,7 +33,7 @@ export const RegisterForm = ({ onSubmit }) => {
             </ErrorText>
           }
           onChange={handleChange}
-          isValid={!errors[nameInput.name]}
+          isValid={errors[nameInput.name] === ''}
         />
         <AuthInput
           required={true}
@@ -48,7 +48,7 @@ export const RegisterForm = ({ onSubmit }) => {
             </ErrorText>
           }
           onChange={handleChange}
-          isValid={!errors[emailInput.name]}
+          isValid={errors[emailInput.name] === ''}
         />
         <AuthInput
           required={true}
@@ -63,7 +63,7 @@ export const RegisterForm = ({ onSubmit }) => {
             </ErrorText>
           }
           onChange={handleChange}
-          isValid={!errors[passwordInput.name]}
+          isValid={errors[passwordInput.name] === ''}
         />
       </div>
 

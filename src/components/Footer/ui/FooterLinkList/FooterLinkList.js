@@ -10,7 +10,10 @@ export const FooterLinkList = ({ links }) => {
           key={index}
           className={styles.item}
         >
-          <FooterLink href={link.href}>
+          <FooterLink
+            href={link.href}
+            target={'_blank'}
+          >
             {link.text}
           </FooterLink>
         </li>

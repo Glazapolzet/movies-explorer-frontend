@@ -9,7 +9,7 @@ import { ProfileButton } from '../ProfileButton/ProfileButton';
 import { AuthButton } from 'features/auth-button';
 
 export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
-  const { values, handleChange, isValid } = useFormWithValidation({
+  const { values, handleChange, isValid, errors } = useFormWithValidation({
     [`${nameInput.name}`]: currentUser.name,
     [`${emailInput.name}`]: currentUser.email,
   });
@@ -40,21 +40,29 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
     <Form className={className} onSubmit={handleSubmit}>
       <div className={styles.container}>
         <ProfileInput
+          required={true}
+          type={'text'}
+          minLength={'2'}
+          maxLength={'30'}
           id={nameInput.id}
           name={nameInput.name}
           label={nameInput.label}
           value={values[nameInput.name]}
           onChange={handleChange}
           disabled={!onEdit}
+          isValid={errors[nameInput.name] === ''}
         />
         <Stroke className={styles.stroke} />
         <ProfileInput
+          type={'email'}
+          required={true}
           id={emailInput.id}
           name={emailInput.name}
           label={emailInput.label}
           value={values[emailInput.name]}
           onChange={handleChange}
           disabled={!onEdit}
+          isValid={errors[emailInput.name] === ''}
         />
       </div>
 

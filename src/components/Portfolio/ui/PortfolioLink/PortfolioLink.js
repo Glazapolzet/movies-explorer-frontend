@@ -7,6 +7,7 @@ export const PortfolioLink = ({ href, children }) => {
     <LinkWithIcon
       href={href}
       icon={navIcon}
+      target={'_blank'}
     >
       {children}
     </LinkWithIcon>

@@ -1,15 +1,19 @@
 import React from 'react';
 import styles from './SearchButton.module.css';
 import searchIcon from 'assets/images/icon_search.svg';
-import { Button } from 'shared/ui';
+import { SubmitButton } from 'shared/ui';
 
-export const SearchButton = ({ onClick }) => {
+export const SearchButton = ({ disabled, ...props }) => {
   return (
-    <Button onClick={onClick}>
+    <SubmitButton
+      className={styles.button}
+      disabled={disabled}
+      {...props}
+    >
       <div
         className={styles.icon}
         style={{backgroundImage: `url(${searchIcon})`}}
       />
-    </Button>
+    </SubmitButton>
   )
 }

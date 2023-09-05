@@ -30,7 +30,7 @@ export const LoginForm = ({ onSubmit }) => {
             </ErrorText>
           }
           onChange={handleChange}
-          isValid={!errors[emailInput.name]}
+          isValid={errors[emailInput.name] === ''}
         />
         <AuthInput
           required={true}
@@ -45,7 +45,7 @@ export const LoginForm = ({ onSubmit }) => {
             </ErrorText>
           }
           onChange={handleChange}
-          isValid={!errors[passwordInput.name]}
+          isValid={errors[passwordInput.name] === ''}
         />
       </div>
 

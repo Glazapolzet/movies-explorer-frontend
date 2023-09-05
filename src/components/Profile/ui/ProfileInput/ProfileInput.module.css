@@ -23,3 +23,15 @@
   color: var(--color-text-primary);
   text-align: right;
 }
+
+.input:focus {
+  outline: var(--input-outline-primary);
+}
+
+.input_error {
+  color: var(--color-text-warning);
+}
+
+.input_error:focus {
+  outline: var(--input-outline-error);
+}

@@ -16,6 +16,22 @@
   color: var(--color-text-secondary);
 }
 
+.input:focus {
+  outline: var(--input-outline-primary);
+}
+
+.input_error {
+  color: var(--color-text-warning);
+}
+
+.input_error::placeholder {
+  color: var(--color-text-warning);
+}
+
+.input_error:focus {
+  outline: var(--input-outline-error);
+}
+
 @media screen and (max-width: 767px) {
   .input {
     padding: 14px 19px;

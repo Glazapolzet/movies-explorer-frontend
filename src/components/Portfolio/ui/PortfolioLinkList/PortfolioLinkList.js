@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './PortfolioLinkList.module.css';
 import { PortfolioLink } from '../PortfolioLink/PortfolioLink';
-import { Stroke } from 'shared/ui/Stroke/Stroke';
+import { Stroke } from 'shared/ui';
 
 export const PortfolioLinkList = ({ links }) => {
   return (
