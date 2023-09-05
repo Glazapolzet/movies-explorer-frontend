@@ -1,0 +1,15 @@
+.button {
+  width: 100%;
+  min-height: 36px;
+  background-color: var(--color-special);
+  border-radius: 6px;
+}
+
+.text {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+}

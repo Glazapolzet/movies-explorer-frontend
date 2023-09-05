@@ -1,0 +1,37 @@
+.authTab {
+  display: flex;
+  column-gap: 30px;
+  align-items: center;
+}
+
+.link {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-m);
+}
+
+.link_default {
+  color: var(--color-text-primary);
+}
+
+.link_landing {
+  padding: 8px 20px;
+  background-color: var(--color-main);
+  border-radius: 3px;
+  color: var(--color-text-landing);
+}
+
+@media screen and (max-width: 767px) {
+  .authTab {
+    column-gap: 14px;
+  }
+
+  .link {
+    font-size: var(--font-size-xxs);
+    line-height: var(--line-height-l);
+  }
+
+  .link_landing {
+    padding: 5px 12px;
+  }
+}

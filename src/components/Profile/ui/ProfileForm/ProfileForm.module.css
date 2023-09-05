@@ -1,0 +1,51 @@
+.form {}
+
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  row-gap: 16px;
+}
+
+.stroke {
+  border-bottom-color: var(--color-stroke-dk);
+}
+
+.submitButtonContent {
+  margin: 220px 0 0;
+  text-align: center;
+}
+
+.submitButtonLayout {
+  display: block;
+}
+
+.submitButtonLayout_hidden {
+  display: none;
+}
+
+.button {
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-primary);
+}
+
+.authButtonLayout {
+  display: block;
+}
+
+.authButtonLayout_hidden {
+  display: none;
+}
+
+@media screen and (max-width: 1279px) {
+  .submitButtonContent {
+    margin: 210px 0 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .submitButtonContent {
+    margin: 379px 0 0;
+  }
+}

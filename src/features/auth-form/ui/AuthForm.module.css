@@ -1,0 +1,12 @@
+.content {
+  min-height: calc(266px + 70px + 45px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 767px) {
+  .content {
+    min-height: calc(266px + 180px + 45px);
+  }
+}

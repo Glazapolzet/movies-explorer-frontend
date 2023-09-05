@@ -1,0 +1,17 @@
+.link {
+  font-family: inherit;
+  text-decoration: none;
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-m);
+  color: var(--color-text-primary);
+  transition: opacity var(--transition-primary);
+}
+
+.link_active{
+  font-weight: var(--font-weight-bold);
+}
+
+.link:hover {
+  opacity: var(--opacity-link-hover);
+}

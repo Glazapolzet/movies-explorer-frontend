@@ -14,8 +14,7 @@
   position: relative;
   max-width: 730px;
   height: fit-content;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0 auto;
   top: calc(184px + var(--header-h));
 }
 

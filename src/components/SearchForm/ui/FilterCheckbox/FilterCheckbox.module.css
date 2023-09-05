@@ -1,0 +1,20 @@
+.filterCheckbox {
+  display: flex;
+  align-self: center;
+  column-gap: 12px;
+}
+
+.caption {
+  color: var(--color-text-primary);
+  font-family: inherit;
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+}
+
+@media screen and (max-width: 767px) {
+  .caption {
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-l);
+  }
+}

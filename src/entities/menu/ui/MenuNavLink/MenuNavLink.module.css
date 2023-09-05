@@ -1,0 +1,24 @@
+.link {
+  padding: 0 0 4px;
+  font-family: inherit;
+  text-decoration: none;
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+  transition: opacity var(--transition-primary);
+}
+
+.link_active{
+  border-bottom: 1px solid var(--color-text-primary);
+}
+
+.link:hover {
+  opacity: var(--opacity-link-hover);
+}
+
+@media screen and (max-width: 767px) {
+  .link {
+    padding: 0 0 7px;
+  }
+}

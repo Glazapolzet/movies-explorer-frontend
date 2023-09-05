@@ -9,6 +9,7 @@
   --color-promo: #073042;
   --color-accent: #EE3465;
   --color-feature: #4285F4;
+  --color-layout: rgba(0, 0, 0, .3);
 
   --color-stroke-dk: #424242;
   --color-stroke-lt: #DADADA;
@@ -20,8 +21,12 @@
   --color-text-landing: #000000;
   --color-text-warning: var(--color-accent, red);
   --color-text-link: var(--color-feature, blue);
+  --color-text-disabled: #C2C2C2;
 
   --color-movie-card: #222222;
+
+  --color-auth-button: var(--color-feature, blue);
+  --color-auth-button-disabled: var(--color-special, gray);
 
   /*Fonts*/
   /*     */

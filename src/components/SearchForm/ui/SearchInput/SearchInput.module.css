@@ -1,0 +1,25 @@
+.input {
+  outline: none;
+  border: none;
+  padding: 14px 22px;
+  background-color: var(--color-special);
+  border-radius: 40px;
+  width: 100%;
+  font-family: inherit;
+  color: var(--color-text-primary);
+  font-size: var(--font-size-primary);
+  line-height: var(--line-height-primary);
+  font-weight: var(--font-weight-normal);
+}
+
+.input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+@media screen and (max-width: 767px) {
+  .input {
+    padding: 14px 19px;
+    font-size: var(--font-size-xs);
+    line-height: var(--line-height-ml);
+  }
+}

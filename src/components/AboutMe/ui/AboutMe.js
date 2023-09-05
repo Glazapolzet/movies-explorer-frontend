@@ -6,7 +6,7 @@ import { StudentCard } from './StudentCard/StudentCard';
 import { StudentInfo } from './StudentInfo/StudentInfo';
 import { StudentLink } from './StudentLink/StudentLink';
 
-const {image, info, link} = aboutMe;
+const { image, info, link } = aboutMe;
 
 export const AboutMe = ({ sectionId }) => {
   return (

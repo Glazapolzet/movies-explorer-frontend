@@ -1,0 +1,12 @@
+.text {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-primary);
+  line-height: var(--line-height-primary);
+}
+
+@media screen and (max-width: 767px) {
+  .text {
+    font-size: var(--font-size-s);
+  }
+}

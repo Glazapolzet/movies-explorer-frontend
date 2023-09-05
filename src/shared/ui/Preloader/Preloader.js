@@ -1,11 +1,11 @@
 import React from 'react';
-import './Preloader.css';
+import styles from './Preloader.module.css';
 
 export const Preloader = () => {
   return (
-    <div className="preloader">
-      <div className="preloader__container">
-        <span className="preloader__round" />
+    <div className={styles.preloader}>
+      <div className={styles.container}>
+        <span className={styles.round} />
       </div>
     </div>
   )

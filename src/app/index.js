@@ -1,14 +1,13 @@
 import React from 'react';
 import './index.css';
-import { Main } from 'pages/Main';
-import { Footer } from 'components/Footer';
+import { Provider } from './providers';
+import { Routing } from 'pages';
 
 const App = () => {
   return (
-    <>
-      <Main />
-      <Footer />
-    </>
+    <Provider>
+      <Routing />
+    </Provider>
   );
 }
 

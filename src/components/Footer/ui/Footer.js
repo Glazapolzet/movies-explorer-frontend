@@ -1,9 +1,10 @@
 import React from 'react';
 import styles from './Footer.module.css';
-import { caption, copyrightText, links } from '../config/config';
+import { caption, copyrightText } from '../config/config';
+import { footerLinks } from 'shared/config';
 import { FooterLayout } from './FooterLayout/FooterLayout';
 import { FooterCaption } from './FooterCaption/FooterCaption';
-import { Stroke } from 'shared/ui/Stroke/Stroke';
+import { Stroke } from 'shared/ui';
 import { FooterLinkList } from './FooterLinkList/FooterLinkList';
 
 export const Footer = () => {
@@ -20,7 +21,7 @@ export const Footer = () => {
             <p className={styles.copyright}>
               &copy; {copyrightText}
             </p>
-            <FooterLinkList links={links} />
+            <FooterLinkList links={footerLinks} />
           </div>
         </div>
       </FooterLayout>

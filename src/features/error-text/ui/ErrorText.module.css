@@ -1,0 +1,12 @@
+.error {
+  display: none;
+  font-family: inherit;
+  font-size: var(--font-size-xxs);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-warning);
+}
+
+.error_visible {
+  display: inline;
+}
