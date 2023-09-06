@@ -1,24 +1,37 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './SearchForm.module.css';
 import { SearchInput } from './SearchInput/SearchInput';
 import { SearchButton } from './SearchButton/SearchButton';
 import { checkboxCaption, searchInput } from '../config/config';
 import { FilterCheckbox } from './FilterCheckbox/FilterCheckbox';
 import { Form, Stroke } from 'shared/ui';
-import { useFormWithValidation } from 'shared/lib';
+import { useForm } from 'shared/lib';
 
 export const SearchForm = () => {
 
-  const { values, handleChange, errors, isValid } = useFormWithValidation({
+  const { values, handleChange: handleInputChange } = useForm({
     [`${searchInput.name}`]: '',
   });
 
-  const inputPlaceholder = errors[searchInput.name] === ''
-    ? searchInput.placeholder
-    : errors[searchInput.name];
+  const [isEmpty, setEmpty] = useState(false);
+
+  const inputPlaceholder = isEmpty
+    ? searchInput.placeholderEmpty
+    : searchInput.placeholder;
+
+  function handleChange(evt) {
+    setEmpty(false);
+
+    handleInputChange(evt);
+  }
 
   function handleSubmit(evt) {
     evt.preventDefault();
+
+    if (values[searchInput.name] === '') {
+      setEmpty(true);
+      return;
+    }
 
     console.log('search..');
   }
@@ -31,6 +44,7 @@ export const SearchForm = () => {
             <Form
               onSubmit={handleSubmit}
               className={styles.searchPanel}
+              noValidate={true}
             >
               <SearchInput
                 required={true}
@@ -40,9 +54,9 @@ export const SearchForm = () => {
                 value={values[searchInput.name]}
                 onChange={handleChange}
                 placeholder={inputPlaceholder}
-                isValid={errors[searchInput.name] === ''}
+                isValid={!isEmpty}
               />
-              <SearchButton disabled={!isValid} />
+              <SearchButton />
             </Form>
 
             <FilterCheckbox
