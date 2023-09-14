@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './SavedMoviesCard.module.css';
 import { Card } from 'entities/card';
 import { convertDurationFormatRU } from 'shared/lib';
-import { CrossButton } from 'features/cross-button';
+import { SavedMoviesCardCrossButton } from '../SavedMoviesCardCrossButton/SavedMoviesCardCrossButton';
 
 export const SavedMoviesCard = ({ card }) => {
   const { nameRU: name, trailerLink, thumbnail, duration } = card;
@@ -18,7 +18,7 @@ export const SavedMoviesCard = ({ card }) => {
         image={thumbnail}
         title={name}
         caption={convertDurationFormatRU(duration)}
-        ButtonComponent={<CrossButton onClick={handleFilmRemove} className={styles.icon} />}
+        ButtonComponent={<SavedMoviesCardCrossButton onClick={handleFilmRemove} />}
       />
     </div>
   )
