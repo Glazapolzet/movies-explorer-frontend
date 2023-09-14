@@ -8,14 +8,26 @@ import { useFormWithValidation } from 'shared/lib';
 import { emailInput, passwordInput } from 'shared/config';
 import { authButtonText } from '../../config/config';
 
-export const LoginForm = ({ onSubmit }) => {
-  const { values, handleChange, errors, isValid } = useFormWithValidation({
+const makeDefaultInputValues = () => {
+  return {
     [`${emailInput.name}`]: '',
     [`${passwordInput.name}`]: '',
-  });
+  }
+};
+
+export const LoginForm = ({ onSubmit }) => {
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation(makeDefaultInputValues());
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    onSubmit(values);
+
+    resetForm(makeDefaultInputValues());
+  }
 
   return (
-    <AuthForm onSubmit={onSubmit}>
+    <AuthForm onSubmit={handleSubmit}>
       <div className={styles.container}>
         <AuthInput
           required={true}

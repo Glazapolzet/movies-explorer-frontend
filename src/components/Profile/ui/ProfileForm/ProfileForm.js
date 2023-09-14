@@ -2,36 +2,39 @@ import React, { useState } from 'react';
 import styles from './ProfileForm.module.css';
 import { Form, Stroke } from 'shared/ui';
 import { ProfileInput } from '../ProfileInput/ProfileInput';
-import { authButtonText, submitButtonText } from '../../config/config';
-import { nameInput, emailInput } from 'shared/config';
-import { useFormWithValidation } from 'shared/lib';
 import { ProfileButton } from '../ProfileButton/ProfileButton';
 import { AuthButton } from 'features/auth-button';
+import { useFormWithValidation } from 'shared/lib';
+import { authButtonText, submitButtonText } from '../../config/config';
+import { nameInput, emailInput } from 'shared/config';
+
+const makeDefaultInputValues = (user) => {
+  return {
+    [`${nameInput.name}`]: user.name,
+    [`${emailInput.name}`]: user.email,
+  }
+};
 
 export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
-  const { values, handleChange, isValid, errors } = useFormWithValidation({
-    [`${nameInput.name}`]: currentUser.name,
-    [`${emailInput.name}`]: currentUser.email,
-  });
+  const { values, handleChange, isValid, errors, resetForm } = useFormWithValidation(makeDefaultInputValues(currentUser));
 
   const [onEdit, setOnEdit] = useState(false);
 
-  const submitButtonLayoutHiddenClassname = onEdit
-    ? styles.submitButtonLayout_hidden
-    : '';
-
-  const authButtonLayoutHiddenClassname = onEdit
-    ? ''
-    : styles.authButtonLayout_hidden;
+  const isSubmitButtonVisible = !onEdit;
+  const isAuthButtonVisible = onEdit;
 
   function handleEdit(evt) {
     evt.preventDefault();
 
     setOnEdit(true);
+
+    resetForm(makeDefaultInputValues(currentUser));
   }
 
   function handleSubmit(evt) {
-    onSubmit(evt);
+    evt.preventDefault();
+
+    onSubmit(values);
 
     setOnEdit(false);
   }
@@ -67,17 +70,17 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
       </div>
 
       <div className={styles.submitButtonContent}>
-        <div className={`${styles.submitButtonLayout} ${submitButtonLayoutHiddenClassname}`}>
+        { isSubmitButtonVisible && (
           <ProfileButton onClick={handleEdit} className={styles.button}>
             {submitButtonText}
           </ProfileButton>
-        </div>
+        )}
 
-        <div className={`${styles.authButtonLayout} ${authButtonLayoutHiddenClassname}`}>
+        { isAuthButtonVisible && (
           <AuthButton disabled={!isValid}>
             {authButtonText}
           </AuthButton>
-        </div>
+        )}
       </div>
     </Form>
   )

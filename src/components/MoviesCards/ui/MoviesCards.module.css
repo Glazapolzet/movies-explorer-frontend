@@ -22,30 +22,6 @@
   row-gap: 60px;
 }
 
-.captionLayout {
-  display: block;
-}
-
-.captionLayout_hidden {
-  display: none;
-}
-
-.buttonLayout {
-  display: block;
-}
-
-.buttonLayout_hidden {
-  display: none;
-}
-
-.preloaderLayout {
-  display: block;
-}
-
-.preloaderLayout_hidden {
-  display: none;
-}
-
 @media screen and (max-width: 1279px) {
   .container {
     row-gap: 80px;

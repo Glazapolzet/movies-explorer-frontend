@@ -1,15 +1,24 @@
 import React from 'react';
 import styles from './SavedMoviesCards.module.css';
-import { savedMovieCards } from 'shared/mocks';
 import { SavedMoviesCardList } from './SavedMoviesCardList/SavedMoviesCardList';
+import { Caption, Preloader } from 'shared/ui';
+import { NOT_FOUND_MESSAGE } from 'shared/config';
 
-export const SavedMoviesCards = () => {
+export const SavedMoviesCards = ({ cards, isLoading, isCardsEmpty }) => {
+  const isCaptionVisible = !isLoading && isCardsEmpty;
+  const isPreloaderVisible = isLoading;
+  const isCardsVisible = !isLoading;
+
   return (
     <section className={styles.savedMoviesCards}>
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.container}>
-            <SavedMoviesCardList cards={savedMovieCards} />
+            { isCardsVisible && <SavedMoviesCardList cards={cards} /> }
+
+            { isCaptionVisible && <Caption>{NOT_FOUND_MESSAGE}</Caption> }
+
+            { isPreloaderVisible && <Preloader/> }
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@
   background-color: var(--color-primary);
   height: 100%;
   min-height: 100vh;
+  z-index: 2;
 }
 
 .content {

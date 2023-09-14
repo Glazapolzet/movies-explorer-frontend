@@ -1,23 +1,41 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import styles from './MoviesCard.module.css';
 import { Card } from 'entities/card';
 import { LikeButton } from 'features/like-button';
-import { CurrentUserContext } from 'shared/contexts';
-import { convertDurationFormatRU } from 'shared/lib';
+import { convertDurationFormatRU, useChangeProperty } from 'shared/lib';
+import { mainApi } from 'shared/api/main';
 
-export const MoviesCard = ({ card }) => {
-  const currentUser = useContext(CurrentUserContext);
+export const MoviesCard = ({ card, onUpdate }) => {
+  const { nameRU: name, trailerLink, thumbnail, duration, movieId } = card;
 
-  const { nameRU: name, trailerLink, thumbnail, duration, owner } = card;
+  const [isLiked, setIsLiked] = useState(Object.hasOwn(card, 'owner'));
 
-  const isLiked = owner._id === currentUser._id;
+  const { addProperty, removeProperty } = useChangeProperty();
+
+  function setLike() {
+    mainApi.saveMovie(card)
+      .then(({ owner }) => {
+        setIsLiked(true);
+        onUpdate(addProperty(card, 'owner', owner));
+      })
+      .catch((err) => console.log(err));
+  }
+
+  function removeLike() {
+    mainApi.deleteMovie(movieId)
+      .then(() => {
+        setIsLiked(false);
+        onUpdate(removeProperty(card, 'owner'));
+      })
+      .catch((err) => console.log(err));
+  }
 
   function handleLike() {
-    //TODO: take it from shared/api and place here
+    return isLiked ? removeLike() : setLike();
   }
 
   return (
-    <div className={styles.moviesCard}>
+    <div className={styles.moviesCard} id={movieId}>
       <Card
         link={trailerLink}
         image={thumbnail}

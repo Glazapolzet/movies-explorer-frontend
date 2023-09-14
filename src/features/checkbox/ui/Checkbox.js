@@ -6,8 +6,8 @@ import checkboxOff from 'assets/images/checkbox_off.svg';
 
 import { Button } from 'shared/ui';
 
-export const Checkbox = ({ atOn, atOff,  className = '' }) => {
-  const [isSwitchedOn, setSwitchedOn] = useState(false);
+export const Checkbox = ({ atOn, atOff, isActive = false,  className = '' }) => {
+  const [isSwitchedOn, setSwitchedOn] = useState(isActive);
 
   const checkboxIcon = isSwitchedOn ? checkboxOn : checkboxOff;
 
