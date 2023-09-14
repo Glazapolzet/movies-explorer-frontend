@@ -8,7 +8,7 @@ export const requestParams = {
 
 export const getResponse = (res) => {
   if (!res.ok) {
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject(`Ошибка ${res.status}`);
   }
 
   return res.json();

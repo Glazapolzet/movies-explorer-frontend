@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './LoginForm.module.css';
 import { AuthInput } from 'features/auth-input';
-import { AuthButton } from 'features/auth-button';
+import { AuthButton } from 'entities/auth-button';
 import { AuthForm } from 'features/auth-form';
 import { ErrorText } from 'features/error-text';
 import { useFormWithValidation } from 'shared/lib';
@@ -18,12 +18,18 @@ const makeDefaultInputValues = () => {
 export const LoginForm = ({ onSubmit }) => {
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation(makeDefaultInputValues());
 
+  const [submitError, setSubmitError] = useState('');
+
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    onSubmit(values);
-
-    resetForm(makeDefaultInputValues());
+    onSubmit(values)
+      .then(() => {
+        resetForm(makeDefaultInputValues());
+      })
+      .catch((err) => {
+        setSubmitError(err.message);
+      });
   }
 
   return (
@@ -61,9 +67,12 @@ export const LoginForm = ({ onSubmit }) => {
         />
       </div>
 
-      <AuthButton disabled={!isValid}>
-        {authButtonText}
-      </AuthButton>
+      <AuthButton
+        disabled={!isValid}
+        buttonText={authButtonText}
+        errorText={submitError}
+        isErrorVisible={submitError !== ''}
+      />
     </AuthForm>
   )
 }

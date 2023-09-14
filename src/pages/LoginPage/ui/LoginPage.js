@@ -8,11 +8,8 @@ const LoginPage = () => {
   const { setAuthorized } = useContext(AuthorizedContext);
 
   function handleSubmit({ email, password }) {
-    mainApi.login({ email, password })
-      .then(() => {
-        setAuthorized(true);
-      })
-      .catch((err) => console.log(err));
+    return mainApi.login({ email, password })
+      .then(() => setAuthorized(true))
   }
 
   return (

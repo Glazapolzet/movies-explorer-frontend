@@ -9,11 +9,10 @@ const ProfilePage = () => {
   const { setAuthorized } = useContext(AuthorizedContext);
 
   function handleSubmit({ name, email }) {
-    mainApi.updateUser({ name, email })
+    return mainApi.updateUser({ name, email })
       .then((updatedUser) => {
         setCurrentUser(updatedUser);
       })
-      .catch((err) => console.log(err));
    }
 
    function handleLogout() {

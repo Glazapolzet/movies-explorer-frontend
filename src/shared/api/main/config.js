@@ -7,10 +7,12 @@ export const requestParams = {
   }
 }
 
-export const getResponse = (res) => {
+export async function getResponse(res) {
+  const response = await res.json();
+
   if (!res.ok) {
-    return Promise.reject(`Ошибка: ${res.status}`);
+    return Promise.reject({ [`status`]: res.status, ...response });
   }
 
-  return res.json();
+  return response;
 }

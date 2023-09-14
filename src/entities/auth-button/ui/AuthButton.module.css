@@ -1,3 +1,9 @@
+.buttonContent {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
 .button {
   width: 100%;
   padding: 15px 0;
@@ -27,6 +33,11 @@
 
 .text_disabled {
   color: var(--color-text-disabled);
+}
+
+.error {
+  align-self: center;
+  font-size: var(--font-size-xs);
 }
 
 @media screen and (max-width: 767px) {

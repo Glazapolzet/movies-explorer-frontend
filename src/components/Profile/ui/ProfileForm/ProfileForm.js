@@ -3,7 +3,7 @@ import styles from './ProfileForm.module.css';
 import { Form, Stroke } from 'shared/ui';
 import { ProfileInput } from '../ProfileInput/ProfileInput';
 import { ProfileButton } from '../ProfileButton/ProfileButton';
-import { AuthButton } from 'features/auth-button';
+import { AuthButton } from 'entities/auth-button';
 import { useFormWithValidation } from 'shared/lib';
 import { authButtonText, submitButtonText } from '../../config/config';
 import { nameInput, emailInput } from 'shared/config';
@@ -19,6 +19,7 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
   const { values, handleChange, isValid, errors, resetForm } = useFormWithValidation(makeDefaultInputValues(currentUser));
 
   const [onEdit, setOnEdit] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const isSubmitButtonVisible = !onEdit;
   const isAuthButtonVisible = onEdit;
@@ -34,9 +35,13 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    onSubmit(values);
-
-    setOnEdit(false);
+    onSubmit(values)
+      .then(() => {
+        setOnEdit(false);
+      })
+      .catch((err) => {
+        setSubmitError(err.message);
+      });
   }
 
   return (
@@ -77,9 +82,12 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
         )}
 
         { isAuthButtonVisible && (
-          <AuthButton disabled={!isValid}>
-            {authButtonText}
-          </AuthButton>
+          <AuthButton
+            disabled={!isValid}
+            buttonText={authButtonText}
+            errorText={submitError}
+            isErrorVisible={submitError !== ''}
+          />
         )}
       </div>
     </Form>
