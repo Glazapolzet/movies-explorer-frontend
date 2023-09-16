@@ -28,7 +28,6 @@ export const useCardsPagination = (items) => {
   }, [numberOfVisibleCards, pagesShowed]);
 
   useEffect(() => {
-    console.log(limit);
     setVisibleCards(() => getItemsInRange(limit));
     setIsCardsEnd(limit >= items.length);
   }, [limit]);

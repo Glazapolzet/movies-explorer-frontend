@@ -7,3 +7,4 @@ export { useChangeProperty } from './useChangeProperty';
 export { useWindowSize } from './useWindowSize';
 export { useForm } from './useForm';
 export { useFormWithValidation } from './useFormWithValidation';
+export { useIsFirstRender } from './useIsFirstRender';
