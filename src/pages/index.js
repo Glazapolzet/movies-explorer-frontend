@@ -1,9 +1,11 @@
-import React, { lazy } from 'react';
+import React, {lazy, useContext} from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { Header } from 'components/Header';
 import { Footer } from 'components/Footer';
 import { Loadable, StickyFooterLayout } from 'shared/ui';
 import { paths } from 'shared/routes';
+import { AuthorizedContext } from '../shared/contexts';
+import { AuthProtectedRoute } from '../features/auth-protected-route';
 
 const MainPage = Loadable(lazy(() => import('./MainPage')));
 const MoviesPage = Loadable(lazy(() => import('./MoviesPage')));
@@ -33,6 +35,8 @@ const ProfilePageLayout = () => {
 }
 
 export const Routing = () => {
+  const { isAuthorized } = useContext(AuthorizedContext);
+
   return (
     <Routes>
       <Route element={<StickyFooterLayout />}>
@@ -47,8 +51,19 @@ export const Routing = () => {
         <Route path={paths.profile} element={<ProfilePage />} />
       </Route>
 
-      <Route path={paths.signup} element={<RegisterPage />} />
-      <Route path={paths.signin} element={<LoginPage />} />
+
+      <Route path={paths.signup} element={
+        <AuthProtectedRoute
+          isAuthorized={isAuthorized}
+          element={<RegisterPage />}
+        />
+      }/>
+      <Route path={paths.signin} element={
+        <AuthProtectedRoute
+          isAuthorized={isAuthorized}
+          element={<LoginPage />}
+        />
+      }/>
 
       <Route path={'*'} element={<NotFoundPage />} />
     </Routes>
