@@ -18,14 +18,19 @@ const MoviesPage = () => {
   const { addFilter } = useDurationFilter();
   const { search } = useSearchFilter();
 
-  const searchParameters = getSearchParameters();
+  const {
+    [`${MOVIES_LOCAL_STORAGE_KEY}`]: localMovies,
+    [`${SEARCHED_MOVIES_LOCAL_STORAGE_KEY}`]: localSearchedMovies,
+    [`${HAS_FILTER_LOCAL_STORAGE_KEY}`]: localHasFilter,
+    [`${SEARCH_QUERY_LOCAL_STORAGE_KEY}`]: localSearchQuery,
+  } = getSearchParameters();
 
   const [isLoading, setLoading] = useState(false);
 
-  const [movies, setMovies] = useState(searchParameters[`${MOVIES_LOCAL_STORAGE_KEY}`]);
-  const [searchedMovies, setSearchedMovies] = useState(searchParameters[`${SEARCHED_MOVIES_LOCAL_STORAGE_KEY}`]);
-  const [searchQuery, setSearchQuery] = useState(searchParameters[`${SEARCH_QUERY_LOCAL_STORAGE_KEY}`]);
-  const [hasFilter, setHasFilter] = useState(searchParameters[`${HAS_FILTER_LOCAL_STORAGE_KEY}`]);
+  const [movies, setMovies] = useState(localMovies);
+  const [searchedMovies, setSearchedMovies] = useState(localSearchedMovies);
+  const [searchQuery, setSearchQuery] = useState(localSearchQuery);
+  const [hasFilter, setHasFilter] = useState(localHasFilter);
 
   const [showedMovies, setShowedMovies] = useState([]);
   const [isShowedMoviesEmpty, setShowedMoviesEmpty] = useState(false);
@@ -80,7 +85,9 @@ const MoviesPage = () => {
   }
 
   function handleMovieUpdate(updatedMovie) {
-    const updatedMovies = movies.map((movie) => movie.movieId === updatedMovie.movieId ? updatedMovie : movie);
+    const updatedMovies = movies.map((movie) => {
+      return movie.movieId === updatedMovie.movieId ? updatedMovie : movie;
+    });
 
     setMovies(updatedMovies);
   }

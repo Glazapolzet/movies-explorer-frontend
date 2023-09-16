@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './SavedMoviesCardList.module.css';
 import { SavedMoviesCard } from '../SavedMoviesCard/SavedMoviesCard';
 
-export const SavedMoviesCardList = ({ cards }) => {
+export const SavedMoviesCardList = ({ cards, onUpdate }) => {
   return (
     <ul className={styles.list}>
       {cards.map((card, index) => (
@@ -10,7 +10,7 @@ export const SavedMoviesCardList = ({ cards }) => {
           key={index}
           className={styles.item}
         >
-          <SavedMoviesCard card={card} />
+          <SavedMoviesCard card={card} onUpdate={onUpdate} />
         </li>
       ))}
     </ul>

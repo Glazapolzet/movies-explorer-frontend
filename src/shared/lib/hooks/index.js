@@ -1,9 +1,9 @@
 export { useDurationFilter } from './useDurationFilter';
 export { useSearchFilter } from './useSearchFilter';
 export { usePopulate } from './usePopulate';
-export { usePagination } from './usePagination';
-export { useIsFirstRender } from './useIsFirstRender';
+export { useCardsPagination } from '../../../features/cards-pagination/useCardsPagination';
 export { useLocalStorage } from './useLocalStorage';
 export { useChangeProperty } from './useChangeProperty';
+export { useWindowSize } from './useWindowSize';
 export { useForm } from './useForm';
 export { useFormWithValidation } from './useFormWithValidation';

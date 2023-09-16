@@ -7,5 +7,11 @@ export const useLocalStorage = () => {
     return JSON.parse(localStorage.getItem(key));
   }
 
-  return {setItemToLocalStorage, getItemFromLocalStorage}
+  function tryValueFromLocalStorage(key, defaultValue) {
+    const itemFromLocalStorage = getItemFromLocalStorage(key);
+
+    return itemFromLocalStorage === null ? defaultValue : itemFromLocalStorage;
+  }
+
+  return {setItemToLocalStorage, getItemFromLocalStorage, tryValueFromLocalStorage}
 }

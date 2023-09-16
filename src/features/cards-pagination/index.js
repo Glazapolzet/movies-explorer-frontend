@@ -1,0 +1,1 @@
+export { useCardsPagination } from './useCardsPagination';

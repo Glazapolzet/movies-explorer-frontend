@@ -7,13 +7,7 @@ import {
 } from 'shared/config';
 
 export const useSearchParameters = () => {
-  const { getItemFromLocalStorage, setItemToLocalStorage } = useLocalStorage();
-
-  function setFromLocalStorage(key, defaultValue) {
-    const itemFromLocalStorage = getItemFromLocalStorage(key);
-
-    return itemFromLocalStorage === null ? defaultValue : itemFromLocalStorage;
-  }
+  const { tryValueFromLocalStorage, setItemToLocalStorage } = useLocalStorage();
 
   function saveSearchParameters(newMovies, newSearchedMovies, newHasFilter, newSearchQuery) {
     setItemToLocalStorage(MOVIES_LOCAL_STORAGE_KEY, newMovies);
@@ -24,10 +18,10 @@ export const useSearchParameters = () => {
 
   function getSearchParameters() {
     return {
-      [`${MOVIES_LOCAL_STORAGE_KEY}`]: setFromLocalStorage(MOVIES_LOCAL_STORAGE_KEY, []),
-      [`${SEARCHED_MOVIES_LOCAL_STORAGE_KEY}`]: setFromLocalStorage(SEARCHED_MOVIES_LOCAL_STORAGE_KEY, []),
-      [`${HAS_FILTER_LOCAL_STORAGE_KEY}`]: setFromLocalStorage(HAS_FILTER_LOCAL_STORAGE_KEY, false),
-      [`${SEARCH_QUERY_LOCAL_STORAGE_KEY}`]: setFromLocalStorage(SEARCH_QUERY_LOCAL_STORAGE_KEY, ''),
+      [`${MOVIES_LOCAL_STORAGE_KEY}`]: tryValueFromLocalStorage(MOVIES_LOCAL_STORAGE_KEY, []),
+      [`${SEARCHED_MOVIES_LOCAL_STORAGE_KEY}`]: tryValueFromLocalStorage(SEARCHED_MOVIES_LOCAL_STORAGE_KEY, []),
+      [`${HAS_FILTER_LOCAL_STORAGE_KEY}`]: tryValueFromLocalStorage(HAS_FILTER_LOCAL_STORAGE_KEY, false),
+      [`${SEARCH_QUERY_LOCAL_STORAGE_KEY}`]: tryValueFromLocalStorage(SEARCH_QUERY_LOCAL_STORAGE_KEY, ''),
     }
   }
 

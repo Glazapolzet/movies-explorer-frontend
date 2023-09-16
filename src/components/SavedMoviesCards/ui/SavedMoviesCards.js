@@ -4,7 +4,7 @@ import { SavedMoviesCardList } from './SavedMoviesCardList/SavedMoviesCardList';
 import { Caption, Preloader } from 'shared/ui';
 import { NOT_FOUND_MESSAGE } from 'shared/config';
 
-export const SavedMoviesCards = ({ cards, isLoading, isCardsEmpty }) => {
+export const SavedMoviesCards = ({ cards, isLoading, isCardsEmpty, onUpdate }) => {
   const isCaptionVisible = !isLoading && isCardsEmpty;
   const isPreloaderVisible = isLoading;
   const isCardsVisible = !isLoading;
@@ -14,7 +14,7 @@ export const SavedMoviesCards = ({ cards, isLoading, isCardsEmpty }) => {
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.container}>
-            { isCardsVisible && <SavedMoviesCardList cards={cards} /> }
+            { isCardsVisible && <SavedMoviesCardList cards={cards} onUpdate={onUpdate} /> }
 
             { isCaptionVisible && <Caption>{NOT_FOUND_MESSAGE}</Caption> }
 

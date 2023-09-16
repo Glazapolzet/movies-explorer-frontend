@@ -1,14 +1,21 @@
 import React from 'react';
 import styles from './SavedMoviesCard.module.css';
 import { Card } from 'entities/card';
-import { convertDurationFormatRU } from 'shared/lib';
+import { convertDurationFormatRU, useChangeProperty } from 'shared/lib';
 import { SavedMoviesCardCrossButton } from '../SavedMoviesCardCrossButton/SavedMoviesCardCrossButton';
+import { mainApi } from 'shared/api/main';
 
-export const SavedMoviesCard = ({ card }) => {
-  const { nameRU: name, trailerLink, thumbnail, duration } = card;
+export const SavedMoviesCard = ({ card, onUpdate }) => {
+  const { nameRU: name, trailerLink, thumbnail, duration, movieId } = card;
+
+  const { removeProperty } = useChangeProperty();
 
   function handleFilmRemove() {
-    //TODO: take it from shared/api and place here
+    mainApi.deleteMovie(movieId)
+      .then(() => {
+        onUpdate(removeProperty(card, 'owner'));
+      })
+      .catch((err) => console.log(err));
   }
 
   return (

@@ -2,18 +2,31 @@ import React, { useEffect, useState } from 'react';
 import styles from './SavedMoviesPage.module.css';
 import { SearchForm } from 'components/SearchForm';
 import { SavedMoviesCards } from 'components/SavedMoviesCards';
-import { useDurationFilter, useSearchFilter } from 'shared/lib';
+import { useChangeProperty, useDurationFilter, useSearchFilter } from 'shared/lib';
 import { useGetSavedMovies } from 'features/movies';
+import { useSearchParameters } from 'features/search';
+import {
+  HAS_FILTER_LOCAL_STORAGE_KEY,
+  MOVIES_LOCAL_STORAGE_KEY,
+  SEARCH_QUERY_LOCAL_STORAGE_KEY,
+} from 'shared/config';
 
 const SavedMoviesPage = () => {
   const [isLoading, setLoading] = useState(false);
-  const [moviesCards, setMoviesCards] = useState([]);
-  const [isCardsEmpty, setCardsEmpty] = useState(false);
+
+  const [movies, setMovies] = useState([]);
+  const [searchedMovies, setSearchedMovies] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const [hasFilter, setHasFilter] = useState(false);
 
+  const [showedMovies, setShowedMovies] = useState([]);
+  const [isShowedMoviesEmpty, setShowedMoviesEmpty] = useState(false);
+
+  const { getSearchParameters, saveSearchParameters } = useSearchParameters();
+  const { removeProperty } = useChangeProperty();
   const { getSavedMovies } = useGetSavedMovies();
-  const { addFilter, removeFilter } = useDurationFilter();
-  const { search: searchMovies } = useSearchFilter();
+  const { addFilter } = useDurationFilter();
+  const { search } = useSearchFilter();
 
   useEffect(() => {
     setLoading(true);
@@ -21,29 +34,62 @@ const SavedMoviesPage = () => {
     getSavedMovies()
       .then((savedMovies) => {
         setLoading(false);
-        setMoviesCards(savedMovies);
+        setMovies(savedMovies);
       })
       .catch((err) => console.log(err));
   }, []);
 
   useEffect(() => {
-    setCardsEmpty(moviesCards.length === 0);
-  }, [moviesCards]);
+    if (!searchQuery) {
+      return;
+    }
+    setSearchedMovies(search(searchQuery, movies));
+  }, [movies, searchQuery]);
 
-  function handleSearch(searchQuery) {
-    const searchedMovies = searchMovies(searchQuery, moviesCards);
+  useEffect(() => {
+    if (!searchQuery) {
+      setShowedMovies(hasFilter ? addFilter(movies) : movies);
+      return;
+    }
+    setShowedMovies(hasFilter ? addFilter(searchedMovies) : searchedMovies);
+  }, [movies, searchedMovies, hasFilter]);
 
-    setMoviesCards(hasFilter ? addFilter(searchedMovies) : searchedMovies);
+  useEffect(() => {
+    setShowedMoviesEmpty(showedMovies.length === 0);
+  }, [showedMovies]);
+
+  function handleSearch(moviesQuery) {
+    setSearchQuery(moviesQuery);
   }
 
   function handleFilterOn() {
     setHasFilter(true);
-    setMoviesCards(addFilter(moviesCards));
   }
 
   function handleFilterOff() {
     setHasFilter(false);
-    setMoviesCards(removeFilter());
+  }
+
+  function handleMovieUpdate(updatedMovie) {
+    const filteredMovies = movies.filter((movie) => movie.movieId !== updatedMovie.movieId);
+
+    setMovies(filteredMovies);
+
+    removeProperty(updatedMovie, '__v');
+    removeProperty(updatedMovie, '_id');
+
+    const {
+      [`${MOVIES_LOCAL_STORAGE_KEY}`]: localMovies,
+      [`${HAS_FILTER_LOCAL_STORAGE_KEY}`]: localHasFilter,
+      [`${SEARCH_QUERY_LOCAL_STORAGE_KEY}`]: localSearchQuery,
+    } = getSearchParameters();
+
+    const updatedLocalMovies = localMovies.map((localMovie) => {
+      return localMovie.movieId === updatedMovie.movieId ? updatedMovie : localMovie;
+    });
+    const updatedLocalSearchedMovies = search(localSearchQuery, updatedLocalMovies);
+
+    saveSearchParameters(updatedLocalMovies, updatedLocalSearchedMovies, localHasFilter, localSearchQuery);
   }
 
   return (
@@ -54,10 +100,11 @@ const SavedMoviesPage = () => {
         offFilter={handleFilterOff}
       />
       <SavedMoviesCards
-        key={moviesCards}
-        cards={moviesCards}
+        key={showedMovies}
+        cards={showedMovies}
+        onUpdate={handleMovieUpdate}
         isLoading={isLoading}
-        isCardsEmpty={isCardsEmpty}
+        isCardsEmpty={isShowedMoviesEmpty}
       />
     </main>
   )

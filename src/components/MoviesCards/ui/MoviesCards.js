@@ -4,11 +4,15 @@ import { MoviesCardList } from './MoviesCardList/MoviesCardList';
 import { MoreButton } from 'features/more-button';
 import { moreButtonText } from '../config/config';
 import { Caption, Preloader } from 'shared/ui';
-import { usePagination } from 'shared/lib';
+import { useCardsPagination } from 'features/cards-pagination';
 import { NOT_FOUND_MESSAGE } from 'shared/config';
 
 export const MoviesCards = ({ cards, onUpdate, isLoading, isCardsEmpty }) => {
-  const {visibleItems: visibleCards, loadMore, isEnd: isCardsEnd} = usePagination(cards, 12);
+  const {
+    visibleCards,
+    loadMore,
+    isCardsEnd
+  } = useCardsPagination(cards);
 
   const isCaptionVisible = !isLoading && isCardsEmpty;
   const isButtonVisible = !isLoading && !isCardsEmpty && !isCardsEnd;
