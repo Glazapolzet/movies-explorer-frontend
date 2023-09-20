@@ -1,26 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './ProfilePage.module.css';
 import { Profile } from 'components/Profile';
-import { mainApi } from 'shared/api/main';
-import { AuthorizedContext, CurrentUserContext } from 'shared/contexts';
+import { useAuth } from 'entities/auth';
 
 const ProfilePage = () => {
-  const { setCurrentUser } = useContext(CurrentUserContext);
-  const { setAuthorized } = useContext(AuthorizedContext);
+  const { updateUser, logout } = useAuth();
 
   function handleSubmit({ name, email }) {
-    return mainApi.updateUser({ name, email })
-      .then((updatedUser) => {
-        setCurrentUser(updatedUser);
-      })
-   }
+    return updateUser({ name, email });
+  }
 
    function handleLogout() {
-    mainApi.logout()
-      .then(() => {
-        setAuthorized(false);
-      })
-      .catch((err) => console.log(err));
+    logout();
    }
 
   return (

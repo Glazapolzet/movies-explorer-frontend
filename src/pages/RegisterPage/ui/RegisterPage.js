@@ -1,21 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './RegisterPage.module.css';
 import { Register } from 'components/Register';
-import { mainApi } from 'shared/api/main';
-import { AuthorizedContext } from 'shared/contexts';
+import { useAuth } from 'entities/auth';
 
 const RegisterPage = () => {
-  const { setAuthorized } = useContext(AuthorizedContext);
+  const { register } = useAuth();
 
   function handleSubmit({ name, email, password }) {
-    return mainApi.register({ name, email, password })
-      .then(() => {
-        mainApi.login({ email, password })
-          .then(() => {
-            setAuthorized(true);
-          })
-          .catch((err) => console.log(err));
-      })
+    return register({ name, email, password });
   }
 
   return (

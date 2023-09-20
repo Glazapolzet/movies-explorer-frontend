@@ -1,10 +1,10 @@
 import React from 'react';
-import styles from './Auth.module.css';
+import styles from './AuthLayout.module.css';
 import { MainLink } from 'features/main-link';
 import { mainLink } from 'shared/config';
 import { AuthTitle } from 'shared/ui';
 
-export const Auth = ({ title, formComponent, captionComponent}) => {
+export const AuthLayout = ({ title, formComponent, captionComponent}) => {
   return (
     <div className={styles.layout}>
       <div className={styles.content}>

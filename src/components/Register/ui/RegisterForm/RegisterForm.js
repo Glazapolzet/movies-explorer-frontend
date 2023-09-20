@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './RegisterForm.module.css';
-import { AuthInput } from 'features/auth-input';
-import { AuthButton } from 'entities/auth-button';
-import { AuthForm } from 'features/auth-form';
+import { AuthInput } from 'entities/auth';
+import { AuthButton } from 'entities/auth';
+import { AuthForm } from 'entities/auth';
 import { ErrorText } from 'features/error-text';
 import { useFormWithValidation } from 'shared/lib';
 import { nameInput, emailInput, passwordInput } from 'shared/config';

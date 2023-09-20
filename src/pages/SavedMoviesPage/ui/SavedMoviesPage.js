@@ -75,14 +75,18 @@ const SavedMoviesPage = () => {
 
     setMovies(filteredMovies);
 
-    removeProperty(updatedMovie, '__v');
-    removeProperty(updatedMovie, '_id');
-
     const {
       [`${MOVIES_LOCAL_STORAGE_KEY}`]: localMovies,
       [`${HAS_FILTER_LOCAL_STORAGE_KEY}`]: localHasFilter,
       [`${SEARCH_QUERY_LOCAL_STORAGE_KEY}`]: localSearchQuery,
     } = getSearchParameters();
+
+    if (localMovies.length === 0) {
+      return;
+    }
+
+    removeProperty(updatedMovie, '__v');
+    removeProperty(updatedMovie, '_id');
 
     const updatedLocalMovies = localMovies.map((localMovie) => {
       return localMovie.movieId === updatedMovie.movieId ? updatedMovie : localMovie;

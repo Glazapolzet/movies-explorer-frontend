@@ -4,6 +4,6 @@ import { paths } from 'shared/routes';
 
 export const AuthProtectedRoute = ({ isAuthorized, element: Component }) => {
   return (
-    !isAuthorized ? Component : <Navigate to={paths.main} replace />
+    !isAuthorized ? Component : <Navigate to={paths.movies} replace />
   )
 }

@@ -1,11 +1,12 @@
-import React, {lazy, useContext} from 'react';
+import React, { lazy, useContext, useEffect } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { Header } from 'components/Header';
 import { Footer } from 'components/Footer';
 import { Loadable, StickyFooterLayout } from 'shared/ui';
 import { paths } from 'shared/routes';
-import { AuthorizedContext } from '../shared/contexts';
-import { AuthProtectedRoute } from '../features/auth-protected-route';
+import { AuthorizedContext } from 'shared/contexts';
+import { AuthProtectedRoute, useAuth } from 'entities/auth';
+import { ProtectedRoute } from 'features/protected-route';
 
 const MainPage = Loadable(lazy(() => import('./MainPage')));
 const MoviesPage = Loadable(lazy(() => import('./MoviesPage')));
@@ -35,20 +36,40 @@ const ProfilePageLayout = () => {
 }
 
 export const Routing = () => {
+  const { tryLoginOnEnter } = useAuth();
   const { isAuthorized } = useContext(AuthorizedContext);
+
+  useEffect(() => {
+    tryLoginOnEnter();
+  }, []);
 
   return (
     <Routes>
       <Route element={<StickyFooterLayout />}>
         <Route element={<BasicLayout />}>
           <Route path={paths.main} element={<MainPage />} />
-          <Route path={paths.movies} element={<MoviesPage />} />
-          <Route path={paths.savedMovies} element={<SavedMoviesPage />} />
+          <Route path={paths.movies} element={
+            <ProtectedRoute
+              isAuthorized={isAuthorized}
+              element={<MoviesPage />}
+            />
+          }/>
+          <Route path={paths.savedMovies} element={
+            <ProtectedRoute
+              isAuthorized={isAuthorized}
+              element={<SavedMoviesPage />}
+            />
+          }/>
         </Route>
       </Route>
 
       <Route element={<ProfilePageLayout />}>
-        <Route path={paths.profile} element={<ProfilePage />} />
+        <Route path={paths.profile} element={
+          <ProtectedRoute
+            isAuthorized={isAuthorized}
+            element={<ProfilePage />}
+          />
+        }/>
       </Route>
 
 

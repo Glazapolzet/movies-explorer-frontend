@@ -1,15 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './LoginPage.module.css';
-import { mainApi } from 'shared/api/main';
 import { Login } from 'components/Login';
-import { AuthorizedContext } from 'shared/contexts';
+import { useAuth } from 'entities/auth';
 
 const LoginPage = () => {
-  const { setAuthorized } = useContext(AuthorizedContext);
+  const { login } = useAuth();
 
   function handleSubmit({ email, password }) {
-    return mainApi.login({ email, password })
-      .then(() => setAuthorized(true))
+    return login({ email, password });
   }
 
   return (

@@ -3,7 +3,7 @@ import styles from './ProfileForm.module.css';
 import { Form, Stroke } from 'shared/ui';
 import { ProfileInput } from '../ProfileInput/ProfileInput';
 import { ProfileButton } from '../ProfileButton/ProfileButton';
-import { AuthButton } from 'entities/auth-button';
+import { AuthButton } from 'entities/auth';
 import { useFormWithValidation } from 'shared/lib';
 import { authButtonText, submitButtonText } from '../../config/config';
 import { nameInput, emailInput } from 'shared/config';
@@ -30,6 +30,7 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
     setOnEdit(true);
 
     resetForm(makeDefaultInputValues(currentUser));
+    setSubmitError('');
   }
 
   function handleSubmit(evt) {

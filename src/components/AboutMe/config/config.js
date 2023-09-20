@@ -1,4 +1,4 @@
-import myPortrait from 'assets/images/my_image.jpg';
+import myPortrait from 'assets/images/my_image.jpeg';
 
 export const sectionTitle = 'Студент';
 
