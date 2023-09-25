@@ -1,0 +1,13 @@
+.link {
+  max-width: fit-content;
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+}
+
+@media screen and (max-width: 767px) {
+  .link {
+    font-size: var(--font-size-s);
+  }
+}

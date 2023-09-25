@@ -1,0 +1,6 @@
+.caption {
+  margin: 0;
+  font-family: inherit;
+  line-height: var(--line-height-primary);
+  color: var(--color-text-secondary);
+}

@@ -1,0 +1,30 @@
+.sectionTitle {
+  display: flex;
+  flex-direction: column;
+  row-gap: 23px;
+}
+
+.title {
+  margin: 0;
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+  letter-spacing: -0.88px;
+}
+
+.stroke {
+  border-bottom-color: var(--color-stroke-lt);
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    font-size: var(--font-size-m);
+    letter-spacing: -0.72px;
+  }
+
+  .sectionTitle {
+    row-gap: 28px;
+  }
+}

@@ -1,0 +1,51 @@
+.layout {
+  height: 100%;
+  width: 100%;
+  max-width: 396px;
+  padding: 0 30px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.titleContent {
+  margin: 40px 0 0;
+}
+
+.formContent {
+  margin: 40px 0 0;
+}
+
+.captionContent {
+  margin: 16px 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 767px) {
+  .mainLinkContent {
+    display: flex;
+    justify-content: center;
+  }
+
+  .titleContent {
+    margin: 50px 0 0;
+    text-align: center;
+  }
+
+  .formContent {
+    margin: 80px 0 0;
+  }
+
+  .captionContent {
+    margin: 14px 0 0;
+  }
+}

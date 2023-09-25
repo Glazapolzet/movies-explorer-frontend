@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.label {
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+}
+
+.input {
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-primary);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-primary);
+  text-align: right;
+}
+
+.input:focus {
+  outline: var(--input-outline-primary);
+}
+
+.input_error {
+  color: var(--color-text-warning);
+}
+
+.input_error:focus {
+  outline: var(--input-outline-error);
+}

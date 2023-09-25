@@ -1,0 +1,17 @@
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.caption {
+  max-width: fit-content;
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-normal);
+}
+
+@media screen and (max-width: 767px) {
+  .caption {
+    font-size: var(--font-size-s);
+  }
+}

@@ -1,0 +1,8 @@
+.title {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-ml);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+}

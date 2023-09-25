@@ -1,0 +1,14 @@
+.link {
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-text-primary);
+}
+
+@media screen and (max-width: 767px) {
+  .link {
+    line-height: var(--line-height-m);
+    font-size: var(--font-size-xs);
+  }
+}

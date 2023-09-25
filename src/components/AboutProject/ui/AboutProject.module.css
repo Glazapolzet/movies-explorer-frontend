@@ -1,0 +1,55 @@
+.aboutProject {
+  width: 100%;
+}
+
+.content {
+  margin: 110px 0;
+}
+
+.textContent {
+  margin: 70px 0 0;
+}
+
+.barContent {
+  margin: 110px 0 0;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 40px;
+}
+
+@media screen and (max-width: 999px) {
+  .content {
+    margin: 90px 0;
+  }
+
+  .barContent {
+    margin: 93px 0 0;
+  }
+
+  .container {
+    column-gap: 30px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .content {
+    margin: 70px 0;
+  }
+
+  .textContent {
+    margin: 60px 0 0;
+  }
+
+  .barContent {
+    margin: 60px 0 0;
+  }
+
+  .container {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 56px;
+  }
+}

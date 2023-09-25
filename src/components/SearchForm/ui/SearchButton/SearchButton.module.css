@@ -1,0 +1,19 @@
+.button {
+  opacity: 1;
+  transition: opacity var(--transition-primary);
+}
+
+.button:disabled {
+  opacity: var(--opacity-button-hover);
+  cursor: default;
+}
+
+.icon {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 34px;
+  height: 34px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}

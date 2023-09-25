@@ -1,0 +1,16 @@
+.title {
+  margin: 0;
+  font-family: inherit;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-primary);
+  letter-spacing: -2px;
+}
+
+@media screen and (max-width: 767px) {
+  .title {
+    font-size: var(--font-size-l);
+    letter-spacing: -1.2px;
+  }
+}

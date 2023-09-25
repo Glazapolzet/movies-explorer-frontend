@@ -1,0 +1,16 @@
+.logo {
+  width: 38px;
+  height: 38px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.link {
+  text-decoration: none;
+  max-width: fit-content;
+  transition: opacity var(--transition-primary);
+}
+
+.link:hover {
+  opacity: var(--opacity-link-hover);
+}
