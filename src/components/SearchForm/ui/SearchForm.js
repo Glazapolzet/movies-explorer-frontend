@@ -7,10 +7,10 @@ import { FilterCheckbox } from './FilterCheckbox/FilterCheckbox';
 import { Form, Stroke } from 'shared/ui';
 import { useForm } from 'shared/lib';
 
-export const SearchForm = ({ onSearch, onFilter, offFilter, isFilterActive }) => {
+export const SearchForm = ({ onSearch, onFilter, offFilter, isFilterActive, initialValue }) => {
 
   const { values, handleChange: handleInputChange } = useForm({
-    [`${searchInput.name}`]: '',
+    [`${searchInput.name}`]: initialValue,
   });
 
   const [isFormEmpty, setFormEmpty] = useState(false);

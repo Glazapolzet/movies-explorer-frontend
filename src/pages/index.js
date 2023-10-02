@@ -1,5 +1,5 @@
-import React, { lazy, useContext, useEffect } from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import React, { lazy, useContext, useEffect, useState } from 'react';
+import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
 import { Header } from 'components/Header';
 import { Footer } from 'components/Footer';
 import { Loadable, StickyFooterLayout } from 'shared/ui';
@@ -7,6 +7,8 @@ import { paths } from 'shared/routes';
 import { AuthorizedContext } from 'shared/contexts';
 import { AuthProtectedRoute, useAuth } from 'entities/auth';
 import { ProtectedRoute } from 'features/protected-route';
+import { SuccessTooltip } from 'entities/info-tooltips';
+import { successMessages } from 'shared/config';
 
 const MainPage = Loadable(lazy(() => import('./MainPage')));
 const MoviesPage = Loadable(lazy(() => import('./MoviesPage')));
@@ -36,57 +38,102 @@ const ProfilePageLayout = () => {
 }
 
 export const Routing = () => {
-  const { tryLoginOnEnter } = useAuth();
   const { isAuthorized } = useContext(AuthorizedContext);
+  const { tryLoginOnEnter } = useAuth();
+
+  const [isSuccessTooltipOpen, setIsSuccessTooltipOpen] = useState(false);
+  const [successTooltipMessage, setSuccessTooltipMessage] = useState('');
+
+  const navigate = useNavigate();
+
+  // const [shouldRedirect, setShouldRedirect] = useState(false);
+
+  function showLoginSuccessMessage() {
+    setIsSuccessTooltipOpen(true);
+    setSuccessTooltipMessage(successMessages.login);
+  }
+
+  function handleTooltipClose() {
+    setIsSuccessTooltipOpen(false);
+  }
 
   useEffect(() => {
-    tryLoginOnEnter();
+    if (isAuthorized) {
+      return;
+    }
+
+    tryLoginOnEnter()
+      .then(() => {
+        navigate(paths.movies, {replace: true});
+        // setShouldRedirect(true);
+      })
+      .catch((err) => console.log(err));
+
   }, []);
 
+  // function test() {
+  //   if (shouldRedirect) {
+  //     setShouldRedirect(false);
+  //
+  //     return <Navigate to={paths.movies} replace />
+  //   }
+  //
+  //   return <MainPage />
+  // }
+
+
   return (
-    <Routes>
-      <Route element={<StickyFooterLayout />}>
-        <Route element={<BasicLayout />}>
-          <Route path={paths.main} element={<MainPage />} />
-          <Route path={paths.movies} element={
+    <>
+      <SuccessTooltip
+        isOpen={isSuccessTooltipOpen}
+        caption={successTooltipMessage}
+        onClose={handleTooltipClose}
+      />
+
+      <Routes>
+        <Route element={<StickyFooterLayout />}>
+          <Route element={<BasicLayout />}>
+            <Route path={paths.main} element={<MainPage />} />
+            <Route path={paths.movies} element={
+              <ProtectedRoute
+                isAuthorized={isAuthorized}
+                element={<MoviesPage />}
+              />
+            }/>
+            <Route path={paths.savedMovies} element={
+              <ProtectedRoute
+                isAuthorized={isAuthorized}
+                element={<SavedMoviesPage />}
+              />
+            }/>
+          </Route>
+        </Route>
+
+        <Route element={<ProfilePageLayout />}>
+          <Route path={paths.profile} element={
             <ProtectedRoute
               isAuthorized={isAuthorized}
-              element={<MoviesPage />}
-            />
-          }/>
-          <Route path={paths.savedMovies} element={
-            <ProtectedRoute
-              isAuthorized={isAuthorized}
-              element={<SavedMoviesPage />}
+              element={<ProfilePage />}
             />
           }/>
         </Route>
-      </Route>
 
-      <Route element={<ProfilePageLayout />}>
-        <Route path={paths.profile} element={
-          <ProtectedRoute
+        <Route path={paths.signup} element={
+          <AuthProtectedRoute
             isAuthorized={isAuthorized}
-            element={<ProfilePage />}
+            element={<RegisterPage />}
           />
         }/>
-      </Route>
 
+        <Route path={paths.signin} element={
+          <AuthProtectedRoute
+            isAuthorized={isAuthorized}
+            element={<LoginPage onLogin={showLoginSuccessMessage} />}
+          />
+        }/>
 
-      <Route path={paths.signup} element={
-        <AuthProtectedRoute
-          isAuthorized={isAuthorized}
-          element={<RegisterPage />}
-        />
-      }/>
-      <Route path={paths.signin} element={
-        <AuthProtectedRoute
-          isAuthorized={isAuthorized}
-          element={<LoginPage />}
-        />
-      }/>
-
-      <Route path={'*'} element={<NotFoundPage />} />
-    </Routes>
+        <Route path={'*'} element={<NotFoundPage />} />
+      </Routes>
+    </>
   )
 }

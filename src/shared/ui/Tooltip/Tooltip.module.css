@@ -1,0 +1,87 @@
+.popup {
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-layout);
+  overflow: hidden;
+  z-index: 1;
+  transition: visibility var(--transition-primary);
+  cursor: pointer;
+}
+
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility var(--transition-primary);
+}
+
+.layout {
+  position: relative;
+  width: 430px;
+  background-color: var(--color-tooltip);
+  border-radius: 10px;
+  cursor: default;
+  padding: 37px 36px;
+  box-sizing: border-box;
+}
+
+.caption {
+  margin: 32px 0 0;
+  text-align: center;
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-primary);
+  color: var(--color-text-dark);
+}
+
+.icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.icon_type_status {
+  margin: 0 auto;
+  width: 120px;
+  height: 120px;
+}
+
+.icon_type_cross {
+  width: 32px;
+  height: 32px;
+}
+
+.button {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+}
+
+@media screen and (max-width: 767px) {
+  .layout {
+    width: 282px;
+    padding: 25px 22px;
+  }
+
+  .title {
+    margin: 40px 0 0;
+    font-size: var(--font-size-m);
+  }
+
+  .icon_type_cross {
+    width: 20px;
+    height: 20px;
+  }
+
+  .button {
+    top: -36px;
+    right: 0;
+  }
+}

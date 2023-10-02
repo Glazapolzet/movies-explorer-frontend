@@ -99,6 +99,7 @@ const MoviesPage = () => {
         onFilter={handleFilterOn}
         offFilter={handleFilterOff}
         isFilterActive={hasFilter}
+        initialValue={searchQuery}
       />
       <MoviesCards
         key={showedMovies}

@@ -9,3 +9,9 @@ export const cardsVisible = {
   tablet: 8,
   mobile: 5,
 }
+
+export const cardsLoad = {
+  desktop: 12,
+  tablet: 8,
+  mobile: 2,
+}

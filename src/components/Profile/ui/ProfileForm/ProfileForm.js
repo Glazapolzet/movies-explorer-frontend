@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './ProfileForm.module.css';
 import { Form, Stroke } from 'shared/ui';
 import { ProfileInput } from '../ProfileInput/ProfileInput';
@@ -20,9 +20,18 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
 
   const [onEdit, setOnEdit] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [isSameUserData, setIsSameUserData] = useState(checkIfSameUserData());
 
   const isSubmitButtonVisible = !onEdit;
   const isAuthButtonVisible = onEdit;
+
+  useEffect(() => {
+    setIsSameUserData(checkIfSameUserData());
+  }, [onEdit, values]);
+
+  function checkIfSameUserData() {
+    return values[nameInput.name] === currentUser.name && values[emailInput.name] === currentUser.email;
+  }
 
   function handleEdit(evt) {
     evt.preventDefault();
@@ -84,7 +93,7 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
 
         { isAuthButtonVisible && (
           <AuthButton
-            disabled={!isValid}
+            disabled={!isValid || isSameUserData}
             buttonText={authButtonText}
             errorText={submitError}
             isErrorVisible={submitError !== ''}

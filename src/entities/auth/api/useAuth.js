@@ -1,14 +1,10 @@
-import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { mainApi } from 'shared/api/main';
-import { paths } from 'shared/routes';
 import { AuthorizedContext, CurrentUserContext } from 'shared/contexts';
 
 export const useAuth = () => {
   const { setCurrentUser } = useContext(CurrentUserContext);
   const { setAuthorized } = useContext(AuthorizedContext);
-
-  const navigate = useNavigate();
 
   function authUser() {
     return mainApi.getUser()
@@ -19,11 +15,7 @@ export const useAuth = () => {
     return mainApi.login({ email, password })
       .then(() => {
         authUser()
-          .then(() => {
-            setAuthorized(true);
-
-            navigate(paths.movies, {replace: true});
-          })
+          .then(() => setAuthorized(true))
           .catch((err) => console.log(err));
       })
   }
@@ -43,7 +35,6 @@ export const useAuth = () => {
       .then(() => {
         setAuthorized(false);
 
-        navigate(paths.main, {replace: true});
         localStorage.clear();
         setCurrentUser({});
       })
@@ -51,12 +42,8 @@ export const useAuth = () => {
   }
 
   const tryLoginOnEnter = () => {
-    authUser()
-      .then(() => {
-        setAuthorized(true);
-
-        navigate(paths.movies, {replace: true});
-      })
+    return authUser()
+      .then(() => setAuthorized(true))
       .catch((err) => {
         localStorage.clear();
 

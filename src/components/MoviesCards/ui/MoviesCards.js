@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './MoviesCards.module.css';
 import { MoviesCardList } from './MoviesCardList/MoviesCardList';
 import { MoreButton } from 'features/more-button';
@@ -11,8 +11,16 @@ export const MoviesCards = ({ cards, onUpdate, isLoading, isCardsEmpty }) => {
   const {
     visibleCards,
     loadMore,
+    resetShowedCards,
     isCardsEnd
   } = useCardsPagination(cards);
+
+  useEffect(() => {
+    if (!isLoading) {
+      return;
+    }
+    resetShowedCards();
+  }, [isLoading])
 
   const isCaptionVisible = !isLoading && isCardsEmpty;
   const isButtonVisible = !isLoading && !isCardsEmpty && !isCardsEnd;
