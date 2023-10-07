@@ -11,7 +11,7 @@ export const cardsVisible = {
 }
 
 export const cardsLoad = {
-  desktop: 12,
-  tablet: 8,
+  desktop: 3,
+  tablet: 2,
   mobile: 2,
 }

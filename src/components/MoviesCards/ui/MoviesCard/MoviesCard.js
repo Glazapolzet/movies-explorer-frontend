@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './MoviesCard.module.css';
 import { Card } from 'entities/card';
 import { LikeButton } from 'features/like-button';
-import { convertDurationFormatRU, useChangeProperty } from 'shared/lib';
+import { convertDurationFormatRU, useChangeObjectProperty } from 'shared/lib';
 import { mainApi } from 'shared/api/main';
 
 export const MoviesCard = ({ card, onUpdate }) => {
@@ -10,7 +10,7 @@ export const MoviesCard = ({ card, onUpdate }) => {
 
   const [isLiked, setIsLiked] = useState(Object.hasOwn(card, 'owner'));
 
-  const { addProperty, removeProperty } = useChangeProperty();
+  const { addProperty, removeProperty } = useChangeObjectProperty();
 
   function setLike() {
     mainApi.saveMovie(card)
@@ -35,7 +35,7 @@ export const MoviesCard = ({ card, onUpdate }) => {
   }
 
   return (
-    <div className={styles.moviesCard} id={movieId}>
+    <div className={styles.moviesCard}>
       <Card
         link={trailerLink}
         image={thumbnail}

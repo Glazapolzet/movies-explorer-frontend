@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './SavedMoviesPage.module.css';
 import { SearchForm } from 'components/SearchForm';
 import { SavedMoviesCards } from 'components/SavedMoviesCards';
-import { useChangeProperty, useDurationFilter, useSearchFilter } from 'shared/lib';
+import { useChangeObjectProperty, useDurationFilter, useSearchFilter } from 'shared/lib';
 import { useGetSavedMovies } from 'features/movies';
 import { useSearchParameters } from 'features/search';
 import {
@@ -23,7 +23,7 @@ const SavedMoviesPage = () => {
   const [isShowedMoviesEmpty, setShowedMoviesEmpty] = useState(false);
 
   const { getSearchParameters, saveSearchParameters } = useSearchParameters();
-  const { removeProperty } = useChangeProperty();
+  const { removeProperty } = useChangeObjectProperty();
   const { getSavedMovies } = useGetSavedMovies();
   const { addFilter } = useDurationFilter();
   const { search } = useSearchFilter();
@@ -102,6 +102,8 @@ const SavedMoviesPage = () => {
         onSearch={handleSearch}
         onFilter={handleFilterOn}
         offFilter={handleFilterOff}
+        isFilterActive={hasFilter}
+        initialValue={searchQuery}
       />
       <SavedMoviesCards
         key={showedMovies}

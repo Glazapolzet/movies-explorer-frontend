@@ -9,7 +9,7 @@ import {
   HAS_FILTER_LOCAL_STORAGE_KEY,
   MOVIES_LOCAL_STORAGE_KEY,
   SEARCH_QUERY_LOCAL_STORAGE_KEY,
-  SEARCHED_MOVIES_LOCAL_STORAGE_KEY
+  SEARCHED_MOVIES_LOCAL_STORAGE_KEY,
 } from 'shared/config';
 
 const MoviesPage = () => {
@@ -73,7 +73,7 @@ const MoviesPage = () => {
         setSearchQuery(moviesQuery);
         setMovies(movies);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
   }
 
   function handleFilterOn() {

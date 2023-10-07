@@ -1,4 +1,14 @@
-import { requestParams, getResponse, BASE_URL } from './config';
+import { requestParams, BASE_URL } from './config';
+
+async function getResponse(res) {
+  const response = await res.json();
+
+  if (!res.ok) {
+    return Promise.reject({ [`status`]: res.status, ...response });
+  }
+
+  return response;
+}
 
 export const getSavedMovies = () => {
   return fetch(`${BASE_URL}/movies`, {

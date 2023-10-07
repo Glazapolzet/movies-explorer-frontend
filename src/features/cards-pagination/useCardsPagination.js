@@ -4,7 +4,7 @@ import { useShowedCards } from './lib/useShowedCards';
 import { SHOWED_CARDS_LOCAL_STORAGE_KEY } from 'shared/config';
 
 export const useCardsPagination = (items) => {
-  const { resolutionCardsLimit, loadCardsLimit } = useCardsResize();
+  const { cardsResolutionLimit, cardsLoadLimit } = useCardsResize();
   const { saveNumberOfShowedCards, getNumberOfShowedCards } = useShowedCards();
 
   const { [`${SHOWED_CARDS_LOCAL_STORAGE_KEY}`]: localShowedCards} = getNumberOfShowedCards();
@@ -42,11 +42,11 @@ export const useCardsPagination = (items) => {
   }
 
   const loadMore = () => {
-    setShowedCards((prevShowedCards) => prevShowedCards + loadCardsLimit);
+    setShowedCards((prevShowedCards) => prevShowedCards + cardsLoadLimit);
   }
 
   const resetShowedCards = () => {
-    setShowedCards(resolutionCardsLimit);
+    setShowedCards(cardsResolutionLimit);
   }
 
   return {visibleCards, loadMore, isCardsEnd, resetShowedCards};

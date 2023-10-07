@@ -20,9 +20,12 @@ export const RegisterForm = ({ onSubmit }) => {
   const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation(makeDefaultInputValues());
 
   const [submitError, setSubmitError] = useState('');
+  const [isFormOnSubmit, setIsFormOnSubmit] = useState(false);
 
   function handleSubmit(evt) {
     evt.preventDefault();
+
+    setIsFormOnSubmit(true);
 
     onSubmit(values)
       .then(() => {
@@ -30,7 +33,8 @@ export const RegisterForm = ({ onSubmit }) => {
       })
       .catch((err) => {
         setSubmitError(err.message);
-      });
+      })
+      .finally(() => setIsFormOnSubmit(false));
   }
 
   return (
@@ -52,6 +56,7 @@ export const RegisterForm = ({ onSubmit }) => {
           }
           onChange={handleChange}
           isValid={errors[nameInput.name] === ''}
+          disabled={isFormOnSubmit}
         />
         <AuthInput
           required={true}
@@ -67,6 +72,7 @@ export const RegisterForm = ({ onSubmit }) => {
           }
           onChange={handleChange}
           isValid={errors[emailInput.name] === ''}
+          disabled={isFormOnSubmit}
         />
         <AuthInput
           required={true}
@@ -82,11 +88,12 @@ export const RegisterForm = ({ onSubmit }) => {
           }
           onChange={handleChange}
           isValid={errors[passwordInput.name] === ''}
+          disabled={isFormOnSubmit}
         />
       </div>
 
       <AuthButton
-        disabled={!isValid}
+        disabled={!isValid || isFormOnSubmit}
         buttonText={authButtonText}
         errorText={submitError}
         isErrorVisible={submitError !== ''}

@@ -1,5 +1,5 @@
 import React, { lazy, useContext, useEffect, useState } from 'react';
-import { Outlet, Route, Routes, useNavigate } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import { Header } from 'components/Header';
 import { Footer } from 'components/Footer';
 import { Loadable, StickyFooterLayout } from 'shared/ui';
@@ -37,83 +37,106 @@ const ProfilePageLayout = () => {
   )
 }
 
-export const Routing = () => {
-  const { isAuthorized } = useContext(AuthorizedContext);
-  const { tryLoginOnEnter } = useAuth();
-
-  const [isSuccessTooltipOpen, setIsSuccessTooltipOpen] = useState(false);
-  const [successTooltipMessage, setSuccessTooltipMessage] = useState('');
-
-  const navigate = useNavigate();
-
-  // const [shouldRedirect, setShouldRedirect] = useState(false);
-
-  function showLoginSuccessMessage() {
-    setIsSuccessTooltipOpen(true);
-    setSuccessTooltipMessage(successMessages.login);
-  }
-
-  function handleTooltipClose() {
-    setIsSuccessTooltipOpen(false);
-  }
-
-  useEffect(() => {
-    if (isAuthorized) {
-      return;
-    }
-
-    tryLoginOnEnter()
-      .then(() => {
-        navigate(paths.movies, {replace: true});
-        // setShouldRedirect(true);
-      })
-      .catch((err) => console.log(err));
-
-  }, []);
-
-  // function test() {
-  //   if (shouldRedirect) {
-  //     setShouldRedirect(false);
-  //
-  //     return <Navigate to={paths.movies} replace />
-  //   }
-  //
-  //   return <MainPage />
-  // }
-
-
+const TooltipLayout = ({ isTooltipOpen, tooltipMessage, onTooltipClose }) => {
   return (
     <>
       <SuccessTooltip
-        isOpen={isSuccessTooltipOpen}
-        caption={successTooltipMessage}
-        onClose={handleTooltipClose}
+        isOpen={isTooltipOpen}
+        caption={tooltipMessage}
+        onClose={onTooltipClose}
       />
+      <Outlet />
+    </>
+  )
+}
 
-      <Routes>
-        <Route element={<StickyFooterLayout />}>
-          <Route element={<BasicLayout />}>
-            <Route path={paths.main} element={<MainPage />} />
-            <Route path={paths.movies} element={
-              <ProtectedRoute
-                isAuthorized={isAuthorized}
-                element={<MoviesPage />}
-              />
-            }/>
-            <Route path={paths.savedMovies} element={
-              <ProtectedRoute
-                isAuthorized={isAuthorized}
-                element={<SavedMoviesPage />}
-              />
-            }/>
-          </Route>
+export const Routing = () => {
+  const { isAuthorized } = useContext(AuthorizedContext);
+  const { authUser, checkUserWasAuthorized, logout } = useAuth();
+
+  const [isTooltipOpen, setIsTooltipOpen] = useState(false);
+  const [tooltipMessage, setTooltipMessage] = useState('');
+
+  const wasAuthorized = checkUserWasAuthorized();
+
+  const showTooltip = (message) => {
+    return () => {
+      setIsTooltipOpen(true);
+      setTooltipMessage(message);
+    }
+  }
+
+  const showLoginSuccessTooltip = showTooltip(successMessages.login);
+  const showRegisterSuccessTooltip = showTooltip(successMessages.register);
+  const showProfileSuccessTooltip = showTooltip(successMessages.editProfile);
+
+  function closeTooltip() {
+    setIsTooltipOpen(false);
+  }
+
+  function logoutOnSessionTimeout() {
+    console.log('logout');
+    if (!isAuthorized) {
+      return;
+    }
+
+    logout();
+  }
+
+  useEffect(() => {
+    if (!wasAuthorized) {
+      return;
+    }
+
+    //604800
+    authUser();
+  }, []);
+
+  useEffect(() => {
+    const t = setInterval(logoutOnSessionTimeout, 20000);
+
+    return () => clearInterval(t);
+  }, [])
+
+  return (
+    <Routes>
+      <Route element={<StickyFooterLayout />}>
+        <Route element={<BasicLayout />}>
+          <Route path={paths.main} element={<MainPage />} />
+          <Route path={paths.movies} element={
+            <ProtectedRoute
+              key={isAuthorized}
+              isAuthorized={isAuthorized || wasAuthorized}
+              element={<MoviesPage />}
+            />
+          }/>
+          <Route path={paths.savedMovies} element={
+            <ProtectedRoute
+              key={isAuthorized}
+              isAuthorized={isAuthorized || wasAuthorized}
+              element={<SavedMoviesPage />}
+            />
+          }/>
         </Route>
+      </Route>
 
+      <Route element={
+        <TooltipLayout
+          isTooltipOpen={isTooltipOpen}
+          onTooltipClose={closeTooltip}
+          tooltipMessage={tooltipMessage}
+        />
+      }>
         <Route element={<ProfilePageLayout />}>
           <Route path={paths.profile} element={
             <ProtectedRoute
-              isAuthorized={isAuthorized}
-              element={<ProfilePage />}
+              key={isAuthorized}
+              isAuthorized={isAuthorized || wasAuthorized}
+              element={
+                <ProfilePage
+                  onProfileUpdate={showProfileSuccessTooltip}
+                />
+              }
             />
           }/>
         </Route>
@@ -121,19 +144,19 @@ export const Routing = () => {
         <Route path={paths.signup} element={
           <AuthProtectedRoute
             isAuthorized={isAuthorized}
-            element={<RegisterPage />}
+            element={<RegisterPage onRegister={showRegisterSuccessTooltip} />}
           />
         }/>
 
         <Route path={paths.signin} element={
           <AuthProtectedRoute
             isAuthorized={isAuthorized}
-            element={<LoginPage onLogin={showLoginSuccessMessage} />}
+            element={<LoginPage onLogin={showLoginSuccessTooltip} />}
           />
         }/>
+      </Route>
 
-        <Route path={'*'} element={<NotFoundPage />} />
-      </Routes>
-    </>
+      <Route path={'*'} element={<NotFoundPage />} />
+    </Routes>
   )
 }

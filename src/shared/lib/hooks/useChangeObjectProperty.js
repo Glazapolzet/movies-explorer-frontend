@@ -1,4 +1,4 @@
-export const useChangeProperty = () => {
+export const useChangeObjectProperty = () => {
   function addProperty(itemToAddProp, propKey, prop) {
     itemToAddProp[`${propKey}`] = prop;
 

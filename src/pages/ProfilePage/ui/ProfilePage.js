@@ -3,11 +3,12 @@ import styles from './ProfilePage.module.css';
 import { Profile } from 'components/Profile';
 import { useAuth } from 'entities/auth';
 
-const ProfilePage = () => {
+const ProfilePage = ({ onProfileUpdate }) => {
   const { updateUser, logout } = useAuth();
 
   function handleSubmit({ name, email }) {
-    return updateUser({ name, email });
+    return updateUser({ name, email })
+      .then(() => onProfileUpdate())
   }
 
    function handleLogout() {

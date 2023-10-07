@@ -18,16 +18,17 @@ const makeDefaultInputValues = (user) => {
 export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
   const { values, handleChange, isValid, errors, resetForm } = useFormWithValidation(makeDefaultInputValues(currentUser));
 
-  const [onEdit, setOnEdit] = useState(false);
+  const [isOnEdit, setIsOnEdit] = useState(false);
   const [submitError, setSubmitError] = useState('');
   const [isSameUserData, setIsSameUserData] = useState(checkIfSameUserData());
+  const [isFormOnSubmit, setIsFormOnSubmit] = useState(false);
 
-  const isSubmitButtonVisible = !onEdit;
-  const isAuthButtonVisible = onEdit;
+  const isSubmitButtonVisible = !isOnEdit;
+  const isAuthButtonVisible = isOnEdit;
 
   useEffect(() => {
     setIsSameUserData(checkIfSameUserData());
-  }, [onEdit, values]);
+  }, [isOnEdit, values]);
 
   function checkIfSameUserData() {
     return values[nameInput.name] === currentUser.name && values[emailInput.name] === currentUser.email;
@@ -36,7 +37,7 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
   function handleEdit(evt) {
     evt.preventDefault();
 
-    setOnEdit(true);
+    setIsOnEdit(true);
 
     resetForm(makeDefaultInputValues(currentUser));
     setSubmitError('');
@@ -45,13 +46,16 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
   function handleSubmit(evt) {
     evt.preventDefault();
 
+    setIsFormOnSubmit(true);
+
     onSubmit(values)
       .then(() => {
-        setOnEdit(false);
+        setIsOnEdit(false);
       })
       .catch((err) => {
         setSubmitError(err.message);
-      });
+      })
+      .finally(() => setIsFormOnSubmit(false));
   }
 
   return (
@@ -67,7 +71,7 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
           label={nameInput.label}
           value={values[nameInput.name]}
           onChange={handleChange}
-          disabled={!onEdit}
+          disabled={!isOnEdit || isFormOnSubmit}
           isValid={errors[nameInput.name] === ''}
         />
         <Stroke className={styles.stroke} />
@@ -79,7 +83,7 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
           label={emailInput.label}
           value={values[emailInput.name]}
           onChange={handleChange}
-          disabled={!onEdit}
+          disabled={!isOnEdit || isFormOnSubmit}
           isValid={errors[emailInput.name] === ''}
         />
       </div>
@@ -93,7 +97,7 @@ export const ProfileForm = ({ onSubmit, currentUser, className = '' }) => {
 
         { isAuthButtonVisible && (
           <AuthButton
-            disabled={!isValid || isSameUserData}
+            disabled={!isValid || isSameUserData || isFormOnSubmit}
             buttonText={authButtonText}
             errorText={submitError}
             isErrorVisible={submitError !== ''}

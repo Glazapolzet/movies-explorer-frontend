@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import styles from './MoviesCards.module.css';
 import { MoviesCardList } from './MoviesCardList/MoviesCardList';
 import { MoreButton } from 'features/more-button';

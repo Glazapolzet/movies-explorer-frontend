@@ -12,14 +12,14 @@
   background-color: var(--color-layout);
   overflow: hidden;
   z-index: 1;
-  transition: visibility var(--transition-primary);
+  transition: opacity var(--transition-primary), visibility var(--transition-primary);
   cursor: pointer;
 }
 
 .popup_opened {
   visibility: visible;
   opacity: 1;
-  transition: visibility var(--transition-primary);
+  transition: opacity var(--transition-primary), visibility var(--transition-primary);
 }
 
 .layout {

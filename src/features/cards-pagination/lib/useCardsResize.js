@@ -1,12 +1,12 @@
 import { useWindowSize } from 'shared/lib';
 import { useEffect, useState } from 'react';
-import {cardsLoad, cardsVisible, screenWidth} from '../config/config';
+import { cardsLoad, cardsVisible, screenWidth } from '../config/config';
 
 export const useCardsResize = () => {
   const { windowWidth } = useWindowSize();
 
-  const [resolutionCardsLimit, setResolutionCardsLimit] = useState(getNumberOfVisibleCards(windowWidth));
-  const [loadCardsLimit, setLoadCardsLimit] = useState(getNumberOfLoadCards(windowWidth));
+  const [cardsResolutionLimit, setCardsResolutionLimit] = useState(getNumberOfVisibleCards(windowWidth));
+  const [cardsLoadLimit, setCardsLoadLimit] = useState(getNumberOfLoadCards(windowWidth));
 
   function getNumberOfVisibleCards(width) {
     return width < screenWidth.desktop
@@ -25,9 +25,9 @@ export const useCardsResize = () => {
   }
 
   useEffect(() => {
-    setResolutionCardsLimit(getNumberOfVisibleCards(windowWidth));
-    setLoadCardsLimit(getNumberOfLoadCards(windowWidth));
+    setCardsResolutionLimit(getNumberOfVisibleCards(windowWidth));
+    setCardsLoadLimit(getNumberOfLoadCards(windowWidth));
   }, [windowWidth]);
 
-  return {resolutionCardsLimit, loadCardsLimit}
+  return {cardsResolutionLimit, cardsLoadLimit}
 }

@@ -4,7 +4,7 @@ import { useCardsResize } from './useCardsResize';
 
 export const useShowedCards = () => {
   const { tryValueFromLocalStorage, setItemToLocalStorage } = useLocalStorage();
-  const { resolutionCardsLimit } = useCardsResize();
+  const { cardsResolutionLimit } = useCardsResize();
 
   function saveNumberOfShowedCards(newNumberOfShowedCards) {
     setItemToLocalStorage(SHOWED_CARDS_LOCAL_STORAGE_KEY, newNumberOfShowedCards);
@@ -12,7 +12,7 @@ export const useShowedCards = () => {
 
   function getNumberOfShowedCards() {
     return {
-      [`${SHOWED_CARDS_LOCAL_STORAGE_KEY}`]: tryValueFromLocalStorage(SHOWED_CARDS_LOCAL_STORAGE_KEY, resolutionCardsLimit),
+      [`${SHOWED_CARDS_LOCAL_STORAGE_KEY}`]: tryValueFromLocalStorage(SHOWED_CARDS_LOCAL_STORAGE_KEY, cardsResolutionLimit),
     }
   }
 

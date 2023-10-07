@@ -1,23 +1,52 @@
 import { useContext } from 'react';
 import { mainApi } from 'shared/api/main';
 import { AuthorizedContext, CurrentUserContext } from 'shared/contexts';
+import { useLocalStorage } from 'shared/lib';
+import { WAS_AUTHORIZED_LOCAL_STORAGE_KEY } from 'shared/config';
 
 export const useAuth = () => {
   const { setCurrentUser } = useContext(CurrentUserContext);
   const { setAuthorized } = useContext(AuthorizedContext);
 
-  function authUser() {
-    return mainApi.getUser()
-      .then((user) => setCurrentUser(user))
+  const { setItemToLocalStorage, getItemFromLocalStorage } = useLocalStorage();
+
+  // const checkUser = () => {
+  //   mainApi.getUser()
+  //     .catch((err) => {
+  //       if (err.status !== 401) {
+  //         return;
+  //       }
+  //
+  //       logout();
+  //     })
+  // }
+
+  const authUser = () => {
+    mainApi.getUser()
+      .then((user) => {
+        setCurrentUser(user);
+        setAuthorized(true);
+      })
+      .catch((err) => {
+        localStorage.clear();
+
+        console.log(err);
+      });
+  }
+
+  const loginUser = () => {
+    authUser();
+
+    setItemToLocalStorage(WAS_AUTHORIZED_LOCAL_STORAGE_KEY, true);
+  }
+
+  const checkUserWasAuthorized = () => {
+    return getItemFromLocalStorage(WAS_AUTHORIZED_LOCAL_STORAGE_KEY);
   }
 
   const login = ({ email, password }) => {
     return mainApi.login({ email, password })
-      .then(() => {
-        authUser()
-          .then(() => setAuthorized(true))
-          .catch((err) => console.log(err));
-      })
+      .then(() => loginUser())
   }
 
   const register = ({ name, email, password }) => {
@@ -41,15 +70,5 @@ export const useAuth = () => {
       .catch((err) => console.log(err));
   }
 
-  const tryLoginOnEnter = () => {
-    return authUser()
-      .then(() => setAuthorized(true))
-      .catch((err) => {
-        localStorage.clear();
-
-        console.log(err);
-      });
-  }
-
-  return { login, register, updateUser, logout, tryLoginOnEnter }
+  return { login, register, logout, updateUser, authUser, checkUserWasAuthorized }
 }

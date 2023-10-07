@@ -1,7 +1,7 @@
 import React from 'react';
-import { RouterProvider } from './RouterProvider';
 import { UserProvider } from './UserProvider';
 import { AuthorizedProvider } from './AuthorizedProvider';
+import { RouterProvider } from './RouterProvider';
 
 export const Provider = ({ children }) => {
   return (
