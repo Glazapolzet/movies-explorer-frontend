@@ -3,41 +3,29 @@ import { mainApi } from 'shared/api/main';
 import { AuthorizedContext, CurrentUserContext } from 'shared/contexts';
 import { useLocalStorage } from 'shared/lib';
 import { WAS_AUTHORIZED_LOCAL_STORAGE_KEY } from 'shared/config';
+import { useClearUserData } from 'features/clear-user-data';
 
 export const useAuth = () => {
   const { setCurrentUser } = useContext(CurrentUserContext);
   const { setAuthorized } = useContext(AuthorizedContext);
 
+  const { clearUserData } = useClearUserData();
+
   const { setItemToLocalStorage, getItemFromLocalStorage } = useLocalStorage();
 
-  // const checkUser = () => {
-  //   mainApi.getUser()
-  //     .catch((err) => {
-  //       if (err.status !== 401) {
-  //         return;
-  //       }
-  //
-  //       logout();
-  //     })
-  // }
-
   const authUser = () => {
-    mainApi.getUser()
+    return mainApi.getUser()
       .then((user) => {
         setCurrentUser(user);
         setAuthorized(true);
       })
       .catch((err) => {
-        localStorage.clear();
+        if (err.status !== 401) {
+          return err;
+        }
 
-        console.log(err);
+        clearUserData();
       });
-  }
-
-  const loginUser = () => {
-    authUser();
-
-    setItemToLocalStorage(WAS_AUTHORIZED_LOCAL_STORAGE_KEY, true);
   }
 
   const checkUserWasAuthorized = () => {
@@ -46,7 +34,11 @@ export const useAuth = () => {
 
   const login = ({ email, password }) => {
     return mainApi.login({ email, password })
-      .then(() => loginUser())
+      .then(() => {
+        authUser();
+
+        setItemToLocalStorage(WAS_AUTHORIZED_LOCAL_STORAGE_KEY, true);
+      })
   }
 
   const register = ({ name, email, password }) => {
@@ -56,18 +48,30 @@ export const useAuth = () => {
 
   const updateUser = ({ name, email }) => {
     return mainApi.updateUser({ name, email })
-      .then((updatedUser) => setCurrentUser(updatedUser));
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
+
+        return updatedUser;
+      })
+      .catch((err) => {
+        if (err.status !== 401) {
+          return err;
+        }
+
+        clearUserData();
+      })
   }
 
   const logout = () => {
-    mainApi.logout()
-      .then(() => {
-        setAuthorized(false);
+    return mainApi.logout()
+      .then(() => clearUserData())
+      .catch((err) => {
+        if (err.status !== 401) {
+          return err;
+        }
 
-        localStorage.clear();
-        setCurrentUser({});
-      })
-      .catch((err) => console.log(err));
+        clearUserData();
+      });
   }
 
   return { login, register, logout, updateUser, authUser, checkUserWasAuthorized }

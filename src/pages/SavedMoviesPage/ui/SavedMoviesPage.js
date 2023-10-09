@@ -3,7 +3,7 @@ import styles from './SavedMoviesPage.module.css';
 import { SearchForm } from 'components/SearchForm';
 import { SavedMoviesCards } from 'components/SavedMoviesCards';
 import { useChangeObjectProperty, useDurationFilter, useSearchFilter } from 'shared/lib';
-import { useGetSavedMovies } from 'features/movies';
+import { useSavedMovies } from 'entities/movies';
 import { useSearchParameters } from 'features/search';
 import {
   HAS_FILTER_LOCAL_STORAGE_KEY,
@@ -24,7 +24,7 @@ const SavedMoviesPage = () => {
 
   const { getSearchParameters, saveSearchParameters } = useSearchParameters();
   const { removeProperty } = useChangeObjectProperty();
-  const { getSavedMovies } = useGetSavedMovies();
+  const { getSavedMovies } = useSavedMovies();
   const { addFilter } = useDurationFilter();
   const { search } = useSearchFilter();
 

@@ -20,3 +20,4 @@ export { Title } from './Title/Title';
 export { AuthTitle } from './AuthTitle/AuthTitle';
 export { Loadable } from './Loadable/Loadable';
 export { Tooltip } from './Tooltip/Tooltip';
+export { ErrorText } from './ErrorText/ErrorText';

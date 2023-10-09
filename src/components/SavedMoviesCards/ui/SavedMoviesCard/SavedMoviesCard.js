@@ -3,17 +3,18 @@ import styles from './SavedMoviesCard.module.css';
 import { Card } from 'entities/card';
 import { convertDurationFormatRU, useChangeObjectProperty } from 'shared/lib';
 import { SavedMoviesCardCrossButton } from '../SavedMoviesCardCrossButton/SavedMoviesCardCrossButton';
-import { mainApi } from 'shared/api/main';
+import { useMovies } from 'entities/movies';
 
 export const SavedMoviesCard = ({ card, onUpdate }) => {
-  const { nameRU: name, trailerLink, thumbnail, duration, movieId } = card;
+  const { nameRU: name, trailerLink, thumbnail, duration } = card;
 
   const { removeProperty } = useChangeObjectProperty();
+  const { deleteMovie } = useMovies();
 
-  function handleFilmRemove() {
-    mainApi.deleteMovie(movieId)
+  function handleFilmRemove(movieCard) {
+    deleteMovie(movieCard.movieId)
       .then(() => {
-        onUpdate(removeProperty(card, 'owner'));
+        onUpdate(removeProperty(movieCard, 'owner'));
       })
       .catch((err) => console.log(err));
   }
@@ -25,7 +26,11 @@ export const SavedMoviesCard = ({ card, onUpdate }) => {
         image={thumbnail}
         title={name}
         caption={convertDurationFormatRU(duration)}
-        ButtonComponent={<SavedMoviesCardCrossButton onClick={handleFilmRemove} />}
+        ButtonComponent={
+          <SavedMoviesCardCrossButton
+            onClick={() => handleFilmRemove(card)}
+          />
+        }
       />
     </div>
   )

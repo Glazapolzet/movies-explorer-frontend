@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Register.module.css';
 import { RegisterForm } from './RegisterForm/RegisterForm';
-import { CaptionWithLink } from 'entities/caption-with-link';
+import { CaptionWithLink } from 'features/caption-with-link';
 import { AuthLayout } from 'entities/auth';
 import { caption, title } from '../config/config';
 

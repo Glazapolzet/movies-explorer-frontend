@@ -3,7 +3,7 @@ import styles from './RegisterForm.module.css';
 import { AuthInput } from 'entities/auth';
 import { AuthButton } from 'entities/auth';
 import { AuthForm } from 'entities/auth';
-import { ErrorText } from 'features/error-text';
+import { ErrorText } from 'shared/ui';
 import { useFormWithValidation } from 'shared/lib';
 import { nameInput, emailInput, passwordInput } from 'shared/config';
 import { authButtonText } from '../../config/config';

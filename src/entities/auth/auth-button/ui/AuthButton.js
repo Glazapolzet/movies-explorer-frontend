@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './AuthButton.module.css';
 import { SubmitButton } from 'shared/ui';
-import { ErrorText } from 'features/error-text';
+import { ErrorText } from 'shared/ui';
 
 export const AuthButton = ({ disabled, isErrorVisible, errorText, buttonText }) => {
   const disabledButtonClass = disabled

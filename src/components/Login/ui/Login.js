@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Login.module.css';
-import { CaptionWithLink } from 'entities/caption-with-link';
+import { CaptionWithLink } from 'features/caption-with-link';
 import { AuthLayout } from 'entities/auth';
 import { LoginForm } from './LoginForm/LoginForm';
 import { caption, title } from '../config/config';

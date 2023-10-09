@@ -1,1 +1,1 @@
-export { SuccessTooltip } from './ui/SuccessTooltip/SuccessTooltip';
+export { SuccessTooltip } from './SuccessTooltip/ui/SuccessTooltip';

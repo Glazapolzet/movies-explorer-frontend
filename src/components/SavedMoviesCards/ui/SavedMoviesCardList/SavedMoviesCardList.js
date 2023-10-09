@@ -5,9 +5,9 @@ import { SavedMoviesCard } from '../SavedMoviesCard/SavedMoviesCard';
 export const SavedMoviesCardList = ({ cards, onUpdate }) => {
   return (
     <ul className={styles.list}>
-      {cards.map((card, index) => (
+      {cards.map((card) => (
         <li
-          key={index}
+          key={card.movieId}
           className={styles.item}
         >
           <SavedMoviesCard card={card} onUpdate={onUpdate} />

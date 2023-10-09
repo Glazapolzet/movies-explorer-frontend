@@ -8,12 +8,19 @@ const ProfilePage = ({ onProfileUpdate }) => {
 
   function handleSubmit({ name, email }) {
     return updateUser({ name, email })
-      .then(() => onProfileUpdate())
+      .then((updatedUser) => {
+        if (!updatedUser) {
+          return;
+        }
+
+        onProfileUpdate();
+      })
   }
 
-   function handleLogout() {
-    logout();
-   }
+  function handleLogout() {
+    logout()
+      .catch((err) => console.log(err));
+  }
 
   return (
     <main className={styles.main}>
