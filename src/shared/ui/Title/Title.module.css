@@ -1,7 +1,7 @@
 .title {
   margin: 0;
   font-family: inherit;
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-xxl);
   font-weight: var(--font-weight-normal);
   line-height: var(--line-height-primary);
   color: var(--color-text-primary);
@@ -10,7 +10,7 @@
 
 @media screen and (max-width: 767px) {
   .title {
-    font-size: var(--font-size-l);
+    font-size: var(--font-size-xl);
     letter-spacing: -1.2px;
   }
 }

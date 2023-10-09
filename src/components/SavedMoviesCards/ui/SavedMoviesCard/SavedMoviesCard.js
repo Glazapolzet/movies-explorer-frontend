@@ -1,14 +1,22 @@
 import React from 'react';
 import styles from './SavedMoviesCard.module.css';
 import { Card } from 'entities/card';
-import { convertDurationFormatRU } from 'shared/lib';
-import { CrossButton } from 'features/cross-button';
+import { convertDurationFormatRU, useChangeObjectProperty } from 'shared/lib';
+import { SavedMoviesCardCrossButton } from '../SavedMoviesCardCrossButton/SavedMoviesCardCrossButton';
+import { useMovies } from 'entities/movies';
 
-export const SavedMoviesCard = ({ card }) => {
+export const SavedMoviesCard = ({ card, onUpdate }) => {
   const { nameRU: name, trailerLink, thumbnail, duration } = card;
 
-  function handleFilmRemove() {
-    //TODO: take it from shared/api and place here
+  const { removeProperty } = useChangeObjectProperty();
+  const { deleteMovie } = useMovies();
+
+  function handleFilmRemove(movieCard) {
+    deleteMovie(movieCard.movieId)
+      .then(() => {
+        onUpdate(removeProperty(movieCard, 'owner'));
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -18,7 +26,11 @@ export const SavedMoviesCard = ({ card }) => {
         image={thumbnail}
         title={name}
         caption={convertDurationFormatRU(duration)}
-        ButtonComponent={<CrossButton onClick={handleFilmRemove} className={styles.icon} />}
+        ButtonComponent={
+          <SavedMoviesCardCrossButton
+            onClick={() => handleFilmRemove(card)}
+          />
+        }
       />
     </div>
   )

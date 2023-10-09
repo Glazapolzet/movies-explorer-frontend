@@ -1,60 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import styles from './MoviesCards.module.css';
-import { movieCards } from 'shared/mocks';
 import { MoviesCardList } from './MoviesCardList/MoviesCardList';
 import { MoreButton } from 'features/more-button';
-import { captionText, moreButtonText } from '../config/config';
+import { moreButtonText } from '../config/config';
 import { Caption, Preloader } from 'shared/ui';
+import { useCardsPagination } from 'features/cards-pagination';
+import { NOT_FOUND_MESSAGE } from 'shared/config';
 
-export const MoviesCards = () => {
-  const [isLoading, setLoading] = useState(false);
+export const MoviesCards = ({ cards, onUpdate, isLoading, isCardsEmpty }) => {
+  const {
+    visibleCards,
+    loadMore,
+    resetShowedCards,
+    isCardsEnd
+  } = useCardsPagination(cards);
 
-  const isCardsEmpty = movieCards.length === 0
+  useEffect(() => {
+    if (!isLoading) {
+      return;
+    }
+    resetShowedCards();
+  }, [isLoading])
 
-  const captionLayoutHiddenClassname = isCardsEmpty
-    ? ''
-    : styles.captionLayout_hidden;
-
-  const buttonLayoutHiddenClassname = isLoading || isCardsEmpty
-    ? styles.buttonLayout_hidden
-    : '';
-
-  const preloaderLayoutHiddenClassname = isLoading
-    ? ''
-    : styles.preloaderLayout_hidden;
-
-  function handleLoad() {
-    setLoading(true);
-
-    setTimeout(stopLoad, 500);
-  }
-
-  function stopLoad() {
-    setLoading(false);
-  }
+  const isCaptionVisible = !isLoading && isCardsEmpty;
+  const isButtonVisible = !isLoading && !isCardsEmpty && !isCardsEnd;
+  const isPreloaderVisible = isLoading;
+  const isCardsVisible = !isLoading;
 
   return (
     <section className={styles.moviesCards}>
       <div className={styles.layout}>
         <div className={styles.content}>
           <div className={styles.container}>
-            <MoviesCardList cards={movieCards} />
+            { isCardsVisible && <MoviesCardList cards={visibleCards} onUpdate={onUpdate} /> }
 
-            <div className={`${styles.captionLayout} ${captionLayoutHiddenClassname}`}>
-              <Caption>
-                {captionText}
-              </Caption>
-            </div>
+            { isCaptionVisible && <Caption>{NOT_FOUND_MESSAGE}</Caption> }
 
-            <div className={`${styles.buttonLayout} ${buttonLayoutHiddenClassname}`}>
-              <MoreButton onClick={handleLoad}>
-                {moreButtonText}
-              </MoreButton>
-            </div>
+            { isButtonVisible && <MoreButton onClick={loadMore}>{moreButtonText}</MoreButton> }
 
-            <div className={`${styles.preloaderLayout} ${preloaderLayoutHiddenClassname}`}>
-              <Preloader />
-            </div>
+            { isPreloaderVisible && <Preloader/> }
           </div>
         </div>
       </div>

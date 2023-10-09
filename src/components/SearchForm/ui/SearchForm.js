@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styles from './SearchForm.module.css';
 import { SearchInput } from './SearchInput/SearchInput';
 import { SearchButton } from './SearchButton/SearchButton';
@@ -7,20 +7,19 @@ import { FilterCheckbox } from './FilterCheckbox/FilterCheckbox';
 import { Form, Stroke } from 'shared/ui';
 import { useForm } from 'shared/lib';
 
-export const SearchForm = () => {
-
+export const SearchForm = ({ onSearch, onFilter, offFilter, isFilterActive, initialValue }) => {
   const { values, handleChange: handleInputChange } = useForm({
-    [`${searchInput.name}`]: '',
+    [`${searchInput.name}`]: initialValue,
   });
 
-  const [isEmpty, setEmpty] = useState(false);
+  const [isFormEmpty, setFormEmpty] = useState(false);
 
-  const inputPlaceholder = isEmpty
+  const inputPlaceholder = isFormEmpty
     ? searchInput.placeholderEmpty
     : searchInput.placeholder;
 
   function handleChange(evt) {
-    setEmpty(false);
+    setFormEmpty(false);
 
     handleInputChange(evt);
   }
@@ -28,12 +27,14 @@ export const SearchForm = () => {
   function handleSubmit(evt) {
     evt.preventDefault();
 
-    if (values[searchInput.name] === '') {
-      setEmpty(true);
+    const inputQuery = values[searchInput.name];
+
+    if (inputQuery === '') {
+      setFormEmpty(true);
       return;
     }
 
-    console.log('search..');
+    onSearch(inputQuery);
   }
 
   return (
@@ -54,14 +55,15 @@ export const SearchForm = () => {
                 value={values[searchInput.name]}
                 onChange={handleChange}
                 placeholder={inputPlaceholder}
-                isValid={!isEmpty}
+                isValid={!isFormEmpty}
               />
               <SearchButton />
             </Form>
 
             <FilterCheckbox
-              atOn={() => console.log('filter on')}
-              atOff={() => console.log('filter off')}
+              atOn={onFilter}
+              atOff={offFilter}
+              isActive={isFilterActive}
               caption={checkboxCaption}
             />
           </div>

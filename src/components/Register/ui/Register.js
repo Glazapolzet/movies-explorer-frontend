@@ -1,24 +1,17 @@
 import React from 'react';
 import styles from './Register.module.css';
 import { RegisterForm } from './RegisterForm/RegisterForm';
-import { CaptionWithLink } from 'entities/caption-with-link';
-import { Auth } from 'entities/auth';
+import { CaptionWithLink } from 'features/caption-with-link';
+import { AuthLayout } from 'entities/auth';
 import { caption, title } from '../config/config';
 
-export const Register = () => {
-
-  function handleSubmit(evt) {
-    evt.preventDefault();
-
-    console.log('submit');
-  }
-
+export const Register = ({ onSubmit }) => {
   return (
     <section className={styles.register}>
-      <Auth
+      <AuthLayout
         title={title}
         formComponent={
-          <RegisterForm onSubmit={handleSubmit} />
+          <RegisterForm onSubmit={onSubmit} />
         }
         captionComponent={
           <CaptionWithLink caption={caption} />

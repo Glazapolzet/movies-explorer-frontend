@@ -1,21 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './LoginForm.module.css';
-import { AuthInput } from 'features/auth-input';
-import { AuthButton } from 'features/auth-button';
-import { AuthForm } from 'features/auth-form';
-import { ErrorText } from 'features/error-text';
+import { AuthInput } from 'entities/auth';
+import { AuthButton } from 'entities/auth';
+import { AuthForm } from 'entities/auth';
+import { ErrorText } from 'shared/ui';
 import { useFormWithValidation } from 'shared/lib';
 import { emailInput, passwordInput } from 'shared/config';
 import { authButtonText } from '../../config/config';
 
-export const LoginForm = ({ onSubmit }) => {
-  const { values, handleChange, errors, isValid } = useFormWithValidation({
+const makeDefaultInputValues = () => {
+  return {
     [`${emailInput.name}`]: '',
     [`${passwordInput.name}`]: '',
-  });
+  }
+};
+
+export const LoginForm = ({ onSubmit }) => {
+  const { values, handleChange, errors, isValid, resetForm } = useFormWithValidation(makeDefaultInputValues());
+
+  const [submitError, setSubmitError] = useState('');
+  const [isFormOnSubmit, setIsFormOnSubmit] = useState(false);
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    setIsFormOnSubmit(true);
+
+    onSubmit(values)
+      .then(() => {
+        resetForm(makeDefaultInputValues());
+      })
+      .catch((err) => {
+        setSubmitError(err.message);
+      })
+      .finally(() => setIsFormOnSubmit(false));
+  }
 
   return (
-    <AuthForm onSubmit={onSubmit}>
+    <AuthForm onSubmit={handleSubmit}>
       <div className={styles.container}>
         <AuthInput
           required={true}
@@ -31,6 +53,7 @@ export const LoginForm = ({ onSubmit }) => {
           }
           onChange={handleChange}
           isValid={errors[emailInput.name] === ''}
+          disabled={isFormOnSubmit}
         />
         <AuthInput
           required={true}
@@ -46,12 +69,16 @@ export const LoginForm = ({ onSubmit }) => {
           }
           onChange={handleChange}
           isValid={errors[passwordInput.name] === ''}
+          disabled={isFormOnSubmit}
         />
       </div>
 
-      <AuthButton disabled={!isValid}>
-        {authButtonText}
-      </AuthButton>
+      <AuthButton
+        disabled={!isValid || isFormOnSubmit}
+        buttonText={authButtonText}
+        errorText={submitError}
+        isErrorVisible={submitError !== ''}
+      />
     </AuthForm>
   )
 }

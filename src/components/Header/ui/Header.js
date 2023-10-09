@@ -13,7 +13,7 @@ import { menuLinks } from '../config/config';
 import { AuthorizedContext } from 'shared/contexts';
 
 export const Header = () => {
-  const isAuthorized = useContext(AuthorizedContext);
+  const { isAuthorized } = useContext(AuthorizedContext);
 
   const location = useLocation();
 

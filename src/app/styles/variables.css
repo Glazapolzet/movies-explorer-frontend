@@ -10,6 +10,7 @@
   --color-accent: #EE3465;
   --color-feature: #4285F4;
   --color-layout: rgba(0, 0, 0, .3);
+  --color-tooltip: #ffffff;
 
   --color-stroke-dk: #424242;
   --color-stroke-lt: #DADADA;
@@ -18,7 +19,7 @@
   --color-text-primary: #FFFFFF;
   --color-text-secondary: #8B8B8B;
   --color-text-secondary-landing: #A0A0A0;
-  --color-text-landing: #000000;
+  --color-text-dark: #000000;
   --color-text-warning: var(--color-accent, red);
   --color-text-link: var(--color-feature, blue);
   --color-text-disabled: #C2C2C2;
@@ -40,9 +41,9 @@
   --font-size-s: calc(12 / 16 * 1rem);
   --font-size-primary: calc(14 / 16 * 1rem);
   --font-size-m: calc(18 / 16 * 1rem);
-  --font-size-ml: calc(24 / 16 * 1rem);
-  --font-size-l: calc(30 / 16 * 1rem);
-  --font-size-xl: calc(50 / 16 * 1rem);
+  --font-size-l: calc(24 / 16 * 1rem);
+  --font-size-xl: calc(30 / 16 * 1rem);
+  --font-size-xxl: calc(50 / 16 * 1rem);
 
   /*Line-height*/
   /*           */

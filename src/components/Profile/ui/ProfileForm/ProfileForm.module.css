@@ -17,25 +17,9 @@
   text-align: center;
 }
 
-.submitButtonLayout {
-  display: block;
-}
-
-.submitButtonLayout_hidden {
-  display: none;
-}
-
 .button {
   font-weight: var(--font-weight-normal);
   color: var(--color-text-primary);
-}
-
-.authButtonLayout {
-  display: block;
-}
-
-.authButtonLayout_hidden {
-  display: none;
 }
 
 @media screen and (max-width: 1279px) {

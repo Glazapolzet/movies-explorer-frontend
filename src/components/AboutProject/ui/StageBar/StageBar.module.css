@@ -17,7 +17,7 @@
 
 .bar_theme_accent {
   background-color: var(--color-main);
-  color: var(--color-text-landing);
+  color: var(--color-text-dark);
 }
 
 .bar_theme_normal {

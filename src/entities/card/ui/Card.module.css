@@ -9,7 +9,7 @@
 
 .image {
   width: 100%;
-  max-height: 203px;
+  height: 203px;
   background-color: lightgray;
   object-fit: cover;
 }
@@ -57,7 +57,7 @@
   }
 
   .image {
-    max-height: 190px;
+    height: 190px;
   }
 
   .content {
